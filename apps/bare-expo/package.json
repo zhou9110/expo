@@ -86,6 +86,7 @@
       "expo-camera",
       "expo-updates",
       "detox",
+      "react-native-safe-area-context",
       "react-native-reanimated"
     ]
   },

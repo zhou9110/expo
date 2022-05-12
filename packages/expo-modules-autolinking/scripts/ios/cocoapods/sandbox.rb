@@ -39,6 +39,12 @@ module Pod
         spec_json = JSON.parse(podspec.to_pretty_json)
         spec_json['pod_target_xcconfig']['DEFINES_MODULE'] = 'YES'
         patched_spec = Specification.from_json(spec_json.to_json)
+
+      elsif name == 'React-RCTFabric'
+        spec_json = JSON.parse(podspec.to_pretty_json)
+        spec_json['pod_target_xcconfig']['DEFINES_MODULE'] = 'YES'
+        spec_json['module_name'] = 'React_RCTFabric'
+        patched_spec = Specification.from_json(spec_json.to_json)
       end
 
       if patched_spec != nil

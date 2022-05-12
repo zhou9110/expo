@@ -1,0 +1,225 @@
+diff --git a/node_modules/react-native/ReactCommon/yoga/Yoga.podspec b/node_modules/react-native/ReactCommon/yoga/Yoga.podspec
+index bdaefc3..de872c5 100644
+--- a/node_modules/react-native/ReactCommon/yoga/Yoga.podspec
++++ b/node_modules/react-native/ReactCommon/yoga/Yoga.podspec
+@@ -51,7 +51,7 @@ Pod::Spec.new do |spec|
+   source_files = File.join('ReactCommon/yoga', source_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+   spec.source_files = source_files
+ 
+-  header_files = 'yoga/{Yoga,YGEnums,YGMacros,YGNode,YGStyle,YGValue}.h'
++  header_files = 'yoga/*.h'
+   header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+   spec.public_header_files = header_files
+ end
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/BitUtils.h b/node_modules/react-native/ReactCommon/yoga/yoga/BitUtils.h
+index b17751a..6332ea2 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/BitUtils.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/BitUtils.h
+@@ -7,6 +7,8 @@
+ 
+ #pragma once
+ 
++#ifdef __cplusplus
++
+ #include <cstdio>
+ #include <cstdint>
+ #include "YGEnums.h"
+@@ -65,3 +67,5 @@ inline void setBooleanData(uint8_t& flags, size_t index, bool value) {
+ } // namespace detail
+ } // namespace yoga
+ } // namespace facebook
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/CompactValue.h b/node_modules/react-native/ReactCommon/yoga/yoga/CompactValue.h
+index 6879ca1..609f3f9 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/CompactValue.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/CompactValue.h
+@@ -7,6 +7,8 @@
+ 
+ #pragma once
+ 
++#ifdef __cplusplus
++
+ #include "YGValue.h"
+ #include "YGMacros.h"
+ #include <cmath>
+@@ -182,3 +184,5 @@ constexpr bool operator!=(CompactValue a, CompactValue b) noexcept {
+ } // namespace detail
+ } // namespace yoga
+ } // namespace facebook
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/Utils.h b/node_modules/react-native/ReactCommon/yoga/yoga/Utils.h
+index d21e8ec..7323faa 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/Utils.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/Utils.h
+@@ -6,6 +6,9 @@
+  */
+ 
+ #pragma once
++
++#ifdef __cplusplus
++
+ #include "YGNode.h"
+ #include "Yoga-internal.h"
+ #include "CompactValue.h"
+@@ -145,3 +148,5 @@ inline YGFloatOptional YGResolveValueMargin(
+ }
+ 
+ void throwLogicalErrorWithMessage(const char* message);
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/YGConfig.h b/node_modules/react-native/ReactCommon/yoga/yoga/YGConfig.h
+index 607408a..a81f194 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/YGConfig.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/YGConfig.h
+@@ -6,6 +6,9 @@
+  */
+ 
+ #pragma once
++
++#ifdef __cplusplus
++
+ #include "Yoga-internal.h"
+ #include "Yoga.h"
+ 
+@@ -74,3 +77,5 @@ public:
+     setCloneNodeCallback(YGCloneNodeFunc{nullptr});
+   }
+ };
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/YGFloatOptional.h b/node_modules/react-native/ReactCommon/yoga/yoga/YGFloatOptional.h
+index 4aa9e76..03d9d75 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/YGFloatOptional.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/YGFloatOptional.h
+@@ -7,6 +7,8 @@
+ 
+ #pragma once
+ 
++#ifdef __cplusplus
++
+ #include <cmath>
+ #include <limits>
+ #include "Yoga-internal.h"
+@@ -68,3 +70,5 @@ inline bool operator>=(YGFloatOptional lhs, YGFloatOptional rhs) {
+ inline bool operator<=(YGFloatOptional lhs, YGFloatOptional rhs) {
+   return lhs < rhs || lhs == rhs;
+ }
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/YGLayout.h b/node_modules/react-native/ReactCommon/yoga/yoga/YGLayout.h
+index 6c23934..91ab814 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/YGLayout.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/YGLayout.h
+@@ -6,6 +6,9 @@
+  */
+ 
+ #pragma once
++
++#ifdef __cplusplus
++
+ #include "BitUtils.h"
+ #include "YGFloatOptional.h"
+ #include "Yoga-internal.h"
+@@ -85,3 +88,5 @@ public:
+   bool operator==(YGLayout layout) const;
+   bool operator!=(YGLayout layout) const { return !(*this == layout); }
+ };
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/YGNodePrint.h b/node_modules/react-native/ReactCommon/yoga/yoga/YGNodePrint.h
+index 0e25b97..6cd52f5 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/YGNodePrint.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/YGNodePrint.h
+@@ -7,6 +7,9 @@
+ 
+ #ifdef DEBUG
+ #pragma once
++
++#ifdef __cplusplus
++
+ #include <string>
+ 
+ #include "Yoga.h"
+@@ -22,4 +25,7 @@ void YGNodeToString(
+ 
+ } // namespace yoga
+ } // namespace facebook
+-#endif
++
++#endif // __cplusplus
++
++#endif // DEBUG
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/Yoga-internal.h b/node_modules/react-native/ReactCommon/yoga/yoga/Yoga-internal.h
+index 08f9da1..0b045c0 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/Yoga-internal.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/Yoga-internal.h
+@@ -6,6 +6,9 @@
+  */
+ 
+ #pragma once
++
++#ifdef __cplusplus
++
+ #include <algorithm>
+ #include <array>
+ #include <cmath>
+@@ -143,6 +146,8 @@ public:
+ } // namespace yoga
+ } // namespace facebook
+ 
++#endif // __cplusplus
++
+ static const float kDefaultFlexGrow = 0.0f;
+ static const float kDefaultFlexShrink = 0.0f;
+ static const float kWebDefaultFlexShrink = 1.0f;
+diff --git a/node_modules/react-native/ReactCommon/yoga/yoga/log.h b/node_modules/react-native/ReactCommon/yoga/yoga/log.h
+index 1d270e8..c6111d9 100644
+--- a/node_modules/react-native/ReactCommon/yoga/yoga/log.h
++++ b/node_modules/react-native/ReactCommon/yoga/yoga/log.h
+@@ -7,6 +7,8 @@
+ 
+ #pragma once
+ 
++#ifdef __cplusplus
++
+ #include "YGEnums.h"
+ 
+ struct YGNode;
+@@ -36,3 +38,5 @@ struct Log {
+ } // namespace detail
+ } // namespace yoga
+ } // namespace facebook
++
++#endif // __cplusplus
+diff --git a/node_modules/react-native/scripts/.packager.env b/node_modules/react-native/scripts/.packager.env
+new file mode 100644
+index 0000000..361f5fb
+--- /dev/null
++++ b/node_modules/react-native/scripts/.packager.env
+@@ -0,0 +1 @@
++export RCT_METRO_PORT=8081
+diff --git a/node_modules/react-native/scripts/react_native_pods.rb b/node_modules/react-native/scripts/react_native_pods.rb
+index f2ceeda..834514d 100644
+--- a/node_modules/react-native/scripts/react_native_pods.rb
++++ b/node_modules/react-native/scripts/react_native_pods.rb
+@@ -267,12 +267,12 @@ def modify_flags_for_new_architecture(installer, cpp_flags)
+           config_file.save_as(xcconfig_path)
+       end
+   end
+-  # Add RCT_NEW_ARCH_ENABLED to Pods project xcconfig
+-  installer.pods_project.targets.each do |target|
+-    # if target.name == 'React-Core'
+-    if target.name == 'React-Core'
+-      puts "#{target.name}"
+-      target.build_configurations.each do |config|
++
++  # Add RCT_NEW_ARCH_ENABLED to generated pod target projects
++  installer.target_installation_results.pod_target_installation_results
++    .each do |pod_name, target_installation_result|
++    if pod_name == 'React-Core'
++      target_installation_result.native_target.build_configurations.each do |config|
+         config.build_settings['OTHER_CPLUSPLUSFLAGS'] = cpp_flags
+       end
+     end

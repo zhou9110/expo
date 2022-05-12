@@ -86,7 +86,8 @@
       "expo-camera",
       "expo-updates",
       "detox",
-      "react-native-reanimated"
+      "react-native-reanimated",
+      "react-native-safe-area-context"
     ]
   },
   "dependencies": {

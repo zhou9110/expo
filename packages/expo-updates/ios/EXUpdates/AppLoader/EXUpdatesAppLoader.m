@@ -63,12 +63,15 @@ static NSString * const EXUpdatesAppLoaderErrorDomain = @"EXUpdatesAppLoader";
 - (NSArray<NSUUID *> *)storedUpdateIds:(EXUpdatesAppLoaderErrorBlock)errorBlock
 {
   // Get all ready updates for this config
-  NSError *dbError = nil;
-  NSArray<EXUpdatesUpdate *> *readyUpdates = [self.database allUpdatesWithStatus:EXUpdatesUpdateStatusReady config:self.config error:&dbError];
-  if (dbError != nil) {
-    errorBlock(dbError);
-    return @[];
-  }
+  __block NSArray<EXUpdatesUpdate *> *readyUpdates = @[];
+  dispatch_sync(self.database.databaseQueue,^{
+    NSError *dbError = nil;
+    readyUpdates = [self.database allUpdatesWithStatus:EXUpdatesUpdateStatusReady config:self.config error:&dbError];
+    if (dbError != nil) {
+      errorBlock(dbError);
+      readyUpdates = @[];
+    }
+  });
   if (readyUpdates == nil || [readyUpdates count] == 0) {
     return @[];
   }

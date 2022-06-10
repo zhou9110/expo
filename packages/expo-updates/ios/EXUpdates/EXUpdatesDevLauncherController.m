@@ -107,6 +107,7 @@ typedef NS_ENUM(NSInteger, EXUpdatesDevLauncherErrorCode) {
   return [loader storedUpdateIds:errorBlock];
 }
 
+// Common initialization for both fetchUpdateWithConfiguration: and storedUpdateIdsWithConfiguration:
 - (nullable NSDictionary *)_setupLoader:(nonnull NSDictionary *)configuration
                                   error:(EXUpdatesErrorBlock)errorBlock
 {

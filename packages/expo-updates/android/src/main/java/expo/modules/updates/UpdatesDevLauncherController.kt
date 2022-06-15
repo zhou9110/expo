@@ -3,6 +3,7 @@ package expo.modules.updates
 import android.content.Context
 import expo.modules.updates.db.entity.AssetEntity
 import expo.modules.updates.db.entity.UpdateEntity
+import expo.modules.updates.db.enums.UpdateStatus
 import expo.modules.updates.launcher.DatabaseLauncher
 import expo.modules.updates.launcher.Launcher.LauncherCallback
 import expo.modules.updates.loader.Loader
@@ -12,6 +13,7 @@ import expo.modules.updates.selectionpolicy.LauncherSelectionPolicySingleUpdate
 import expo.modules.updates.selectionpolicy.ReaperSelectionPolicyDevelopmentClient
 import expo.modules.updates.selectionpolicy.SelectionPolicy
 import expo.modules.updatesinterface.UpdatesInterface
+import expo.modules.updatesinterface.UpdatesInterface.UpdateCallback
 import org.json.JSONObject
 import java.util.*
 
@@ -138,6 +140,22 @@ class UpdatesDevLauncherController : UpdatesInterface {
         }
       }
     )
+  }
+
+  override fun storedUpdateIdsWithConfiguration(configuration: HashMap<String, Any>, context: Context, callback: UpdateCallback): List<UUID> {
+    val controller = UpdatesController.instance
+    val updatesConfiguration = UpdatesConfiguration(context, configuration)
+    if (updatesConfiguration.updateUrl == null || updatesConfiguration.scopeKey == null) {
+      callback.onFailure(Exception("Failed to load update: UpdatesConfiguration object must include a valid update URL"))
+      return listOf()
+    }
+    if (controller.updatesDirectory == null) {
+      callback.onFailure(controller.updatesDirectoryException)
+      return listOf()
+    }
+    val updateDao = controller.databaseHolder.database.updateDao()
+    val readyUpdates = updateDao.loadAllUpdatesWithStatus(UpdateStatus.READY)
+    return readyUpdates.map { u -> u.id }
   }
 
   companion object {

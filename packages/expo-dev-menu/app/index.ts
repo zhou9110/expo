@@ -1,3 +1,9 @@
+console.log("dupa");
+global.setImmediate = () => {console.trace();};
+
+require("react-native/Libraries/ReactPrivate/ReactNativePrivateInitializeCore");
+console.log("dupa");
+
 import { AppRegistry } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 

@@ -76,7 +76,8 @@ function runPropUpdates() {
   loopID += 1;
 }
 
-const setImmediate = (fun) => setTimeout(fun, 0);
+require("react-native/Libraries/ReactPrivate/ReactNativePrivateInitializeCore");
+
 const scheduleUpdates =
   Platform.OS === 'web' ? requestAnimationFrame : setImmediate;
 

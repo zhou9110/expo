@@ -1,5 +1,5 @@
 import { EventSubscription } from 'fbemitter';
-import { LocalAssets, Manifest, UpdateCheckResult, UpdateEvent, UpdateFetchResult } from './Updates.types';
+import { LocalAssets, Manifest, UpdateCheckResult, UpdateEvent, UpdateFetchResult, UpdateErrorLogResult } from './Updates.types';
 export * from './Updates.types';
 /**
  * The UUID that uniquely identifies the currently running update if `expo-updates` is enabled. The
@@ -96,6 +96,14 @@ export declare function reloadAsync(): Promise<void>;
  * timeout communicating with the server.
  */
 export declare function checkForUpdateAsync(): Promise<UpdateCheckResult>;
+/**
+ * Retrieves the most recent error logs from the client, going back maxAge seconds (default: 3600 seconds = 1 hour)
+ *
+ * @return A promise that fulfills with an [`UpdateErrorLogResult`](#updateerrorlogresult) object;
+ *
+ * The promise rejects if there is an unexpected error in retrieving the logs.
+ */
+export declare function readErrorLogAsync(maxAge?: number): Promise<UpdateErrorLogResult>;
 /**
  * Downloads the most recently deployed update to your project from server to the device's local
  * storage. This method cannot be used in development mode, and the returned promise will be

@@ -73,6 +73,22 @@ export declare type UpdateEvent = {
     message?: string;
 };
 /**
+ * An object representing a single log entry from expo-updates logging on the client.
+ */
+export declare type UpdateErrorLog = {
+    timestamp: number;
+    message: string;
+    code: string;
+    level: string;
+    updateId?: string;
+    assetId?: string;
+    stacktrace?: string[];
+};
+/**
+ * The result of retrieving error logs from the client.
+ */
+export declare type UpdateErrorLogResult = UpdateErrorLog[];
+/**
  * @hidden
  */
 export declare type LocalAssets = Record<string, string>;

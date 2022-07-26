@@ -13,6 +13,7 @@ import {
   UpdateCheckResult,
   UpdateEvent,
   UpdateFetchResult,
+  UpdateErrorLogResult,
 } from './Updates.types';
 
 export * from './Updates.types';
@@ -169,6 +170,21 @@ export async function checkForUpdateAsync(): Promise<UpdateCheckResult> {
   return result;
 }
 
+/**
+ * Retrieves the most recent error logs from the client, going back maxAge seconds (default: 3600 seconds = 1 hour)
+ *
+ * @return A promise that fulfills with an [`UpdateErrorLogResult`](#updateerrorlogresult) object;
+ *
+ * The promise rejects if there is an unexpected error in retrieving the logs.
+ */
+export async function readErrorLogAsync(maxAge?: number): Promise<UpdateErrorLogResult> {
+  if (!ExpoUpdates.readErrorLogAsync) {
+    throw new UnavailabilityError('Updates', 'readErrorLogAsync');
+  }
+  const age = maxAge || 3600;
+  const result = await ExpoUpdates.readErrorLogAsync(age);
+  return result;
+}
 /**
  * Downloads the most recently deployed update to your project from server to the device's local
  * storage. This method cannot be used in development mode, and the returned promise will be

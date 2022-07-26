@@ -8,6 +8,12 @@
 #import <EXUpdates/EXUpdatesService.h>
 #import <EXUpdates/EXUpdatesUpdate.h>
 
+#if __has_include(<EXUpdates/EXUpdates-Swift.h>)
+#import <EXUpdates/EXUpdates-Swift.h>
+#else
+#import "EXUpdates-Swift.h"
+#endif
+
 @interface EXUpdatesModule ()
 
 @property (nonatomic, weak) id<EXUpdatesModuleInterface> updatesService;
@@ -130,6 +136,26 @@ EX_EXPORT_METHOD_AS(checkForUpdateAsync,
   } errorBlock:^(NSError *error) {
     reject(@"ERR_UPDATES_CHECK", error.localizedDescription, error);
   }];
+}
+
+EX_EXPORT_METHOD_AS(readErrorLogAsync,
+                     readErrorLogAsync:(NSNumber *)maxAge
+                     resolve:(EXPromiseResolveBlock)resolve
+                      reject:(EXPromiseRejectBlock)reject)
+{
+  EXUpdatesLogReader *reader = [EXUpdatesLogReader new];
+  NSError *error = nil;
+  NSInteger age = 3600; // default 1 hour
+  if (maxAge != nil) {
+    age = [maxAge intValue];
+  }
+  NSDate *epoch = [NSDate dateWithTimeIntervalSinceNow:-age];
+  NSArray<NSDictionary *> *entries = [reader getLogEntriesNewerThan:epoch error:&error];
+  if (error != nil) {
+    reject([NSString stringWithFormat:@"%ld",[error code]], [error localizedDescription], error);
+  } else {
+    resolve(entries);
+  }
 }
 
 EX_EXPORT_METHOD_AS(fetchUpdateAsync,

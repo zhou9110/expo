@@ -15,8 +15,8 @@ const images = {
   uri_jpg: { uri: 'https://docs.expo.dev/static/images/notification-sound-ios.jpg' },
   uri_gif: { uri: 'https://docs.expo.dev/static/images/blur-opacity-example.gif' },
   uri_ico: { uri: 'https://docs.expo.dev/static/images/favicon.ico' },
-  uri_youtube_svg: {
-    uri: 'https://www.youtube.com/about/static/svgs/icons/brand-resources/YouTube-logo-full_color_light.svg?cache=72a5d9c',
+  uri_rn_svg: {
+    uri: 'https://d33wubrfki0l68.cloudfront.net/554c3b0e09cf167f0281fda839a5433f2040b349/ecfc9/img/header_logo.svg',
   },
 };
 

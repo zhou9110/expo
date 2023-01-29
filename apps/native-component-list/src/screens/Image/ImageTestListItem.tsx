@@ -42,12 +42,12 @@ export default function ImageTestListItem({ test, animValue }: PropsType) {
           loadOnDemand={test.loadOnDemand}
         />
         <View style={styles.spacer} />
-        <ImageTestView
+        {/* <ImageTestView
           style={styles.image}
           imageProps={imageProps}
           ImageComponent={RNImage}
           loadOnDemand={test.loadOnDemand}
-        />
+        /> */}
       </View>
     </View>
   );
@@ -83,5 +83,6 @@ const styles = StyleSheet.create({
   image: {
     width: (Dimensions.get('window').width - 30) / 2,
     height: 160 - 10 - 32,
+    // tintColor: 'blue',
   },
 });

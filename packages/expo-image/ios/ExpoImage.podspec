@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.dependency 'SDWebImageWebPCoder', '~> 0.9.1'
   s.dependency 'SDWebImageAVIFCoder', '~> 0.9.4'
   s.dependency 'SDWebImageSVGCoder', '~> 1.6.1'
+  s.dependency 'SDWebImageSVGNativeCoder'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {

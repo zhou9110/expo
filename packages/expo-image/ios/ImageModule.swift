@@ -4,6 +4,7 @@ import ExpoModulesCore
 import SDWebImage
 import SDWebImageWebPCoder
 import SDWebImageAVIFCoder
+import SDWebImageSVGNativeCoder
 import SDWebImageSVGCoder
 
 public final class ImageModule: Module {
@@ -107,7 +108,8 @@ public final class ImageModule: Module {
       SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
     }
     SDImageCodersManager.shared.addCoder(SDImageAVIFCoder.shared)
-    SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
+//    SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
+    SDImageCodersManager.shared.addCoder(SDImageSVGNativeCoder.shared)
     SDImageCodersManager.shared.addCoder(SDImageHEICCoder.shared)
   }
 

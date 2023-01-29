@@ -46,7 +46,11 @@ public final class ImageView: ExpoView {
 
   var blurRadius: CGFloat = 0.0
 
-  var imageTintColor: UIColor = .clear
+  var imageTintColor: UIColor = .clear {
+    didSet {
+      sdImageView.tintColor = imageTintColor
+    }
+  }
 
   var cachePolicy: ImageCachePolicy = .disk
 
@@ -150,6 +154,9 @@ public final class ImageView: ExpoView {
     // We want to store only original images (without transformations).
     context[.queryCacheType] = SDImageCacheType.none.rawValue
     context[.storeCacheType] = SDImageCacheType.none.rawValue
+
+    context[.imageThumbnailPixelSize] = CGSize(width: 2300, height: 2046)
+    context[.imagePreserveAspectRatio] = false
 
     // Some loaders (e.g. blurhash) need access to the source and the screen scale.
     context[ImageView.contextSourceKey] = source
@@ -308,7 +315,6 @@ public final class ImageView: ExpoView {
   private func createTransformPipeline() -> SDImagePipelineTransformer {
     let transformers: [SDImageTransformer] = [
       SDImageBlurTransformer(radius: blurRadius),
-      SDImageTintTransformer(color: imageTintColor)
     ]
     return SDImagePipelineTransformer(transformers: transformers)
   }
@@ -380,11 +386,11 @@ public final class ImageView: ExpoView {
     resetImageAnalyzer()
 
     sdImageView.contentMode = contentFit.toContentMode()
-    sdImageView.image = image
 
     if enableLiveTextInteraction {
       analyzeImage()
     }
+    sdImageView.image = imageTintColor.cgColor.alpha <= .ulpOfOne ? image : image?.withRenderingMode(.alwaysTemplate)
   }
 
   // MARK: - Helpers

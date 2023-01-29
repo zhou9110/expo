@@ -6,7 +6,7 @@ import SourcesTests from './sources';
 
 const tests: ImageTestGroup = {
   name: 'Image',
-  tests: [AppearanceTests, BorderTests, ShadowsTests, SourcesTests],
+  tests: [SourcesTests], //[AppearanceTests, BorderTests, ShadowsTests, SourcesTests],
 };
 
 export default tests;

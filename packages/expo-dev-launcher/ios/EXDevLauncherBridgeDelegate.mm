@@ -13,12 +13,23 @@
 
 
 static NSString *const kRNConcurrentRoot = @"concurrentRoot";
- 
+
 #endif
 
 #import "React/RCTAppSetupUtils.h"
 
-@implementation EXDevLauncherBridgeDelegate : NSObject
+
+#if __has_include(<React-RCTAppDelegate/RCTAppDelegate.h>)
+#import <React-RCTAppDelegate/RCTAppDelegate.h>
+#elif __has_include(<React_RCTAppDelegate/RCTAppDelegate.h>)
+// for importing the header from framework, the dash will be transformed to underscore
+#import <React_RCTAppDelegate/RCTAppDelegate.h>
+#endif
+
+@interface EXDevLauncherBridgeDelegate: RCTAppDelegate
+@end
+
+@implementation EXDevLauncherBridgeDelegate : RCTAppDelegate
 
 + (RCTRootView *)createRootViewWithModuleName:(NSString *)moduleName launchOptions:(NSDictionary * _Nullable)launchOptions application:(UIApplication *)application{
     BOOL enableTM = NO;

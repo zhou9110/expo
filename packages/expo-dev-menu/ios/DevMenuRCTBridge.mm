@@ -31,6 +31,11 @@
 #import <reacthermes/HermesExecutorFactory.h>
 #endif
 
+
+#import <ReactCommon/RCTTurboModuleManager.h>
+#import "EXDevLauncherController.h"
+#import <React/RCTAppSetupUtils.h>
+
 @implementation DevMenuRCTCxxBridge
 
 - (instancetype)initWithParentBridge:(RCTBridge *)bridge
@@ -62,7 +67,7 @@
 
 - (NSArray<Class> *)filterModuleList:(NSArray<Class> *)modules
 {
-  NSArray<NSString *> *allowedModules = @[@"RCT", @"ExpoBridgeModule", @"EXNativeModulesProxy", @"EXReactNativeEventEmitter"];
+  NSArray<NSString *> *allowedModules = @[@"RCT", @"ExpoBridgeModule", @"EXNativeModulesProxy", @"ViewManagerAdapter_", @"EXReactNativeEventEmitter"];
   NSArray<Class> *filteredModuleList = [modules filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nullable clazz, NSDictionary<NSString *,id> * _Nullable bindings) {
     NSString* clazzName = NSStringFromClass(clazz);
 
@@ -70,6 +75,7 @@
       return true;
     }
 
+      NSLog(@"DevMenu: %@", clazzName);
     for (NSString *allowedModule in allowedModules) {
       if ([clazzName hasPrefix:allowedModule]) {
         return true;
@@ -114,9 +120,18 @@
 
 - (std::unique_ptr<facebook::react::JSExecutorFactory>)jsExecutorFactoryForBridge:(RCTBridge *)bridge
 {
+
+#if RCT_NEW_ARCH_ENABLED
+  RCTTurboModuleManager  *_turboModuleManager = [[RCTTurboModuleManager alloc] initWithBridge:bridge
+                                                                 delegate:[EXDevLauncherController sharedInstance]
+                                                                jsInvoker:bridge.jsCallInvoker];
+  return RCTAppSetupDefaultJsExecutorFactory(bridge, _turboModuleManager);
+#endif
+
 #if __has_include(<reacthermes/HermesExecutorFactory.h>)
   // Disable Hermes debugger to prevent Hermes debugger uses dev-menu
   // as inspecting target.
+
   auto installBindings = facebook::react::RCTJSIExecutorRuntimeInstaller(nullptr);
   auto *hermesExecutorFactory = new facebook::react::HermesExecutorFactory(installBindings);
   hermesExecutorFactory->setEnableDebugger(false);
@@ -126,5 +141,47 @@
   return nullptr;
 #endif
 }
+
+
+#if RCT_NEW_ARCH_ENABLED
+
+#pragma mark RCTTurboModuleManagerDelegate
+
+- (Class)getModuleClassFromName:(const char *)name
+{
+  return RCTCoreModulesClassProvider(name);
+}
+
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
+                                                      jsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
+{
+  return nullptr;
+}
+
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
+                                                     initParams:
+                                                         (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+  return nullptr;
+}
+
+- (id<RCTTurboModule>)getModuleInstanceFromClass:(Class)moduleClass
+{
+  return RCTAppSetupDefaultModuleFromClass(moduleClass);
+}
+
+#pragma mark - New Arch Enabled settings
+
+- (BOOL)turboModuleEnabled
+{
+  return YES;
+}
+
+- (BOOL)fabricEnabled
+{
+  return YES;
+}
+
+#endif
 
 @end

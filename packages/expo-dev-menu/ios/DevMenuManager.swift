@@ -208,7 +208,7 @@ open class DevMenuManager: NSObject {
     }
 
     let args = data == nil ? [eventName] : [eventName, data!]
-    bridge.enqueueJSCall("RCTDeviceEventEmitter.emit", args: args)
+    // bridge.enqueueJSCall("RCTDeviceEventEmitter.emit", args: args)
   }
 
   // MARK: internals
@@ -239,6 +239,7 @@ open class DevMenuManager: NSObject {
     guard let bridge = currentBridge else {
       return nil
     }
+    // return empty array?
     let allExtensions = bridge.modulesConforming(to: DevMenuExtensionProtocol.self) as! [DevMenuExtensionProtocol]
 
     let uniqueExtensionNames = Set(
@@ -395,6 +396,7 @@ open class DevMenuManager: NSObject {
     }
     if visible {
       guard currentBridge != nil else {
+        //
         debugPrint("DevMenuManager: There is no bridge to render DevMenu.")
         return false
       }

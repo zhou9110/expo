@@ -25,6 +25,9 @@ const Stack = createStackNavigator();
 type LauncherAppProps = object;
 
 export function App(props: LauncherAppProps) {
+  const isFabricEnabled = global.nativeFabricUIManager != null;
+  console.log('global', Object.keys(global));
+  console.log('isFabricEnabled', isFabricEnabled);
   return (
     <View style={{ direction: 'ltr', flex: 1 }}>
       <LoadInitialData loader={<Splash />}>

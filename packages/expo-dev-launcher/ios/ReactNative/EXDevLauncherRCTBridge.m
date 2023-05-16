@@ -1,7 +1,7 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
 #import "EXDevLauncherRCTBridge.h"
-#import "EXDevLauncherController.h"
+#import "EXDevLauncherController.h" //
 #import "RCTCxxBridge+Private.h"
 
 #import <React/RCTPerformanceLogger.h>
@@ -53,6 +53,7 @@
     }
 
     NSString* clazzName = NSStringFromClass(clazz);
+      NSLog(@"EXDevLauncherRCTCxxBridge: %@", clazzName);
     for (NSString *allowedModule in allowedModules) {
       if ([clazzName hasPrefix:allowedModule]) {
         return true;

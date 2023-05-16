@@ -107,6 +107,7 @@ public final class ComponentData: RCTComponentData {
  Creates a setter for the event prop. Used only by Paper.
  */
 private func createEventSetter(eventName: String, bridge: RCTBridge?) -> RCTPropBlockAlias {
+  //
   return { [weak bridge] (target: RCTComponent, value: Any) in
     installEventDispatcher(forEvent: eventName, onView: target) { [weak target] (body: [String: Any]) in
       if let target = target {

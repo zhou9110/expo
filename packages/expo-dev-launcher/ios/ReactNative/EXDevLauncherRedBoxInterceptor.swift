@@ -16,23 +16,23 @@ public class EXDevLauncherRedBoxInterceptor: NSObject {
   }
 
   static private func swizzle() {
-    EXDevLauncherUtils.swizzle(
-      selector: #selector(RCTCxxBridge.module(forName:)),
-      withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forName:)),
-      forClass: RCTCxxBridge.self
-    )
+    // EXDevLauncherUtils.swizzle(
+    //   selector: #selector(RCTCxxBridge.module(forName:)),
+    //   withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forName:)),
+    //   forClass: RCTCxxBridge.self
+    // )
 
-    EXDevLauncherUtils.swizzle(
-      selector: #selector(RCTCxxBridge.module(forName:lazilyLoadIfNecessary:)),
-      withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forName:lazilyLoadIfNecessary:)),
-      forClass: RCTCxxBridge.self
-    )
+    // EXDevLauncherUtils.swizzle(
+    //   selector: #selector(RCTCxxBridge.module(forName:lazilyLoadIfNecessary:)),
+    //   withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forName:lazilyLoadIfNecessary:)),
+    //   forClass: RCTCxxBridge.self
+    // )
 
-    EXDevLauncherUtils.swizzle(
-      selector: #selector(RCTCxxBridge.module(for:)),
-      withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forClass:)),
-      forClass: RCTCxxBridge.self
-    )
+    // EXDevLauncherUtils.swizzle(
+    //   selector: #selector(RCTCxxBridge.module(for:)),
+    //   withSelector: #selector(RCTCxxBridge.EXDevLauncher_module(forClass:)),
+    //   forClass: RCTCxxBridge.self
+    // )
   }
 }
 
@@ -58,6 +58,7 @@ extension RCTCxxBridge {
   @objc
   private func replaceRedBox(_ module: Any?) -> Any? {
     if module is RCTRedBox {
+      return module
       let logBox = EXDevLauncher_module(forClass: RCTLogBox.self) as? RCTLogBox
       let customRedBox = EXDevLauncherRedBoxInterceptor.customRedBox
       customRedBox.register(logBox)

@@ -219,6 +219,8 @@ PODS:
     - ExpoModulesCore
   - ExpoRandom (13.3.0):
     - ExpoModulesCore
+  - ExpoScreenCapture (5.4.0):
+    - ExpoModulesCore
   - ExpoScreenOrientation (6.1.1):
     - ExpoModulesCore
     - RCT-Folly (= 2021.07.22.00)
@@ -243,8 +245,6 @@ PODS:
   - ExpoVideoThumbnails (7.5.0):
     - ExpoModulesCore
   - ExpoWebBrowser (12.4.1):
-    - ExpoModulesCore
-  - EXScreenCapture (5.4.0):
     - ExpoModulesCore
   - EXSensors (12.4.1):
     - ExpoModulesCore
@@ -871,6 +871,7 @@ DEPENDENCIES:
   - ExpoNetwork (from `../../../packages/expo-network/ios`)
   - ExpoPrint (from `../../../packages/expo-print/ios`)
   - ExpoRandom (from `../../../packages/expo-random/ios`)
+  - ExpoScreenCapture (from `../../../packages/expo-screen-capture/ios`)
   - ExpoScreenOrientation (from `../../../packages/expo-screen-orientation/ios`)
   - ExpoSecureStore (from `../../../packages/expo-secure-store/ios`)
   - ExpoSharing (from `../../../packages/expo-sharing/ios`)
@@ -1120,6 +1121,9 @@ EXTERNAL SOURCES:
   ExpoRandom:
     inhibit_warnings: false
     :path: "../../../packages/expo-random/ios"
+  ExpoScreenCapture:
+    inhibit_warnings: false
+    :path: "../../../packages/expo-screen-capture/ios"
   ExpoScreenOrientation:
     inhibit_warnings: false
     :path: "../../../packages/expo-screen-orientation/ios"
@@ -1153,9 +1157,6 @@ EXTERNAL SOURCES:
   ExpoWebBrowser:
     inhibit_warnings: false
     :path: "../../../packages/expo-web-browser/ios"
-  EXScreenCapture:
-    inhibit_warnings: false
-    :path: "../../../packages/expo-screen-capture/ios"
   EXSensors:
     inhibit_warnings: false
     :path: "../../../packages/expo-sensors/ios"
@@ -1337,6 +1338,7 @@ SPEC CHECKSUMS:
   ExpoNetwork: ec64e847710ace665b7bc2ed060673863210afe5
   ExpoPrint: 78d4f8d4c4510206356c6fa66fa0873a5c9707d5
   ExpoRandom: 1320eaeee184be2aad9cbb8a2b987942982ebbb4
+  ExpoScreenCapture: 4eb24f00b792513b6a84c59378da0fdbab83885a
   ExpoScreenOrientation: 109030fc94bd259ce12ca29cbd467e298d07f81b
   ExpoSecureStore: eea16d67ae42a61a3a25c581198525bfa2cce61c
   ExpoSharing: 134ecbecb2f81295d7dd5d66ce90ae050962ecfd
@@ -1348,7 +1350,6 @@ SPEC CHECKSUMS:
   ExpoTrackingTransparency: b14d3e7946b36962ee87c8656be540d60ff70c5d
   ExpoVideoThumbnails: cb03c144b3152e5cd5a421a8c93b4fcc9ac3d308
   ExpoWebBrowser: e0d83469554d1c09ca383f32207b569680880c5d
-  EXScreenCapture: 61e01521ebc7b156696a8b2b68ce35ef36be7ca2
   EXSensors: a59fd72b3a36c4b8acd0018ead376bc3985efb2e
   EXSplashScreen: fe099ce10e06650ef935d977a33ac8d6a10f72fc
   EXStructuredHeaders: 324cc3130571d2696357fafd8be7fd9a0b5fdf6e

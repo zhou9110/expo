@@ -38,8 +38,8 @@ export default class LinearGradientScreen extends React.Component<{}, State> {
     this._interval = setInterval(() => {
       this.setState((state) => ({
         count: state.count + 1,
-        colorTop: incrementColor(state.colorTop, 1),
-        colorBottom: incrementColor(state.colorBottom, -1),
+        colorTop: incrementColor(state.colorTop, 3),
+        colorBottom: incrementColor(state.colorBottom, -3),
       }));
     }, 100);
   }
@@ -49,8 +49,9 @@ export default class LinearGradientScreen extends React.Component<{}, State> {
   }
 
   render() {
-    const location = Math.sin(this.state.count / 100) * 0.5;
+    const location = Math.abs(Math.min(Math.sin(this.state.count / 100) * 0.5, 1));
     const position = Math.sin(this.state.count / 100);
+
     return (
       <ScrollView
         style={{ flex: 1 }}

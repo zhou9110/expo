@@ -1,35 +1,38 @@
 package expo.modules.lineargradient
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
-
-typealias ViewType = LinearGradientView
 
 class LinearGradientModule : Module() {
   override fun definition() = ModuleDefinition {
     Name("ExpoLinearGradient")
 
     View(LinearGradientView::class) {
-      Prop("colors") { view: ViewType, colors: IntArray ->
-        view.setColors(colors)
+      Prop("colors") { view, colors: List<Int> ->
+        view.colors = colors.map { Color(it) }
       }
 
-      Prop("locations") { view: ViewType, locations: FloatArray? ->
+      Prop("locations") { view, locations: List<Float>? ->
         locations?.let {
-          view.setLocations(it)
+          view.locations = it
         }
       }
 
-      Prop("startPoint") { view: ViewType, startPoint: Pair<Float, Float>? ->
-        view.setStartPosition(startPoint?.first ?: 0.5f, startPoint?.second ?: 0f)
+      Prop("startPoint") { view, startPoint: Pair<Float, Float>? ->
+        startPoint?.let {
+          view.startPos = Offset(it.first, it.second)
+        }
       }
 
-      Prop("endPoint") { view: ViewType, endPoint: Pair<Float, Float>? ->
-        view.setEndPosition(endPoint?.first ?: 0.5f, endPoint?.second ?: 1f)
+      Prop("endPoint") { view, endPoint: Pair<Float, Float>? ->
+        endPoint?.let {
+          view.endPos = Offset(it.first, it.second)
+        }
       }
 
-      Prop("borderRadii") { view: ViewType, borderRadii: FloatArray? ->
-        view.setBorderRadii(borderRadii ?: FloatArray(8) { 0f })
+      Prop("borderRadii") { view, borderRadii: FloatArray? ->
       }
     }
   }

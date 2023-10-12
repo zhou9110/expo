@@ -35,3 +35,9 @@ public func OnViewDidUpdateProps<ViewType: UIView>(
 ) -> ViewLifecycleMethod<ViewType> {
   return ViewLifecycleMethod(type: .didUpdateProps, closure: closure)
 }
+
+public func OnViewDestroys<ViewType: UIView>(
+  @_implicitSelfCapture _ closure: @escaping (_ view: ViewType) -> Void
+) -> ViewLifecycleMethod<ViewType> {
+  return ViewLifecycleMethod(type: .didDestroy, closure: closure)
+}

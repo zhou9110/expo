@@ -49,8 +49,16 @@ public final class VideoModule: Module {
       AsyncFunction("exitFullscreen") { view in
         view.exitFullscreen()
       }
-    }
+      
+      OnViewDidUpdateProps { view in
+        print("Updating props")
+      }
 
+      OnViewDestroys { view in
+        print("View is destroyed")
+      }
+    }
+    
     Class(VideoPlayer.self) {
       Constructor { (source: String?) -> VideoPlayer in
         if let source, let url = URL(string: source) {

@@ -52,7 +52,7 @@ export default function VideoScreen() {
         style={styles.video}
         player={player}
         nativeControls={false}
-        contentFit="contain"
+        contentFit="cover"
         contentPosition={{ dx: 0, dy: 0 }}
         allowsFullscreen
         showsTimecodes={false}

@@ -5,6 +5,7 @@
  */
 internal enum ViewLifecycleMethodType {
   case didUpdateProps
+  case didDestroy
 }
 
 /**

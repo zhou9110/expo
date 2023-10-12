@@ -1,13 +1,12 @@
-import { ReactNode, PureComponent, useMemo, createRef } from 'react';
+import { ReactNode, PureComponent, useRef, createRef } from 'react';
 
 import NativeVideoModule from './NativeVideoModule';
 import NativeVideoView from './NativeVideoView';
 import { VideoPlayer, VideoViewProps } from './VideoView.types';
 
 export function useVideoPlayer(source: string | null = null): VideoPlayer {
-  return useMemo(() => {
-    return new NativeVideoModule.VideoPlayer(source);
-  }, []);
+  const ref = useRef(new NativeVideoModule.VideoPlayer(source));
+  return ref.current;
 }
 
 export class VideoView extends PureComponent<VideoViewProps> {

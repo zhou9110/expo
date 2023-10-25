@@ -102,6 +102,8 @@ typedef void (^ClassConstructorBlock)(EXJavaScriptObject * _Nonnull thisValue, N
  */
 - (nullable EXJavaScriptObject *)createObjectWithPrototype:(nonnull EXJavaScriptObject *)prototype;
 
+- (nonnull EXJavaScriptObject *)createObjectWithClass:(nonnull EXJavaScriptObject *)jsClass;
+
 #pragma mark - Script evaluation
 
 /**

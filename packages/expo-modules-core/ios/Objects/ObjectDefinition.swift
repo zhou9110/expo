@@ -62,7 +62,9 @@ public class ObjectDefinition: AnyDefinition, JavaScriptObjectBuilder {
   // MARK: - JavaScriptObjectBuilder
 
   public func build(appContext: AppContext) throws -> JavaScriptObject {
-    let object = try appContext.runtime.createObject()
+    let runtime = try appContext.runtime
+    let eventEmitterClass = EXJavaScriptRuntimeManager.getEventEmitterClass(runtime)
+    let object = try runtime.createObject(withClass: eventEmitterClass)
     try decorate(object: object, appContext: appContext)
     return object
   }

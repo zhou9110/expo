@@ -72,4 +72,9 @@ static NSString *modulesHostObjectLegacyPropertyName = @"ExpoModules";
   expo::events::decorateEventEmitter(*[runtime get], *[object get]);
 }
 
++ (nonnull EXJavaScriptObject *)getEventEmitterClass:(nonnull EXJavaScriptRuntime *)runtime
+{
+  return [[[runtime global] getProperty:@"EventEmitter"] getObject];
+}
+
 @end

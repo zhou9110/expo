@@ -30,11 +30,13 @@ export class EventEmitter {
     // as they are required by `NativeEventEmitter`. This is only temporary — in the future
     // JSI modules will have event emitter built in.
     if (nativeModule.__expo_module_name__ && NativeModules.EXReactNativeEventEmitter) {
-      nativeModule.addListener = (...args) =>
-        NativeModules.EXReactNativeEventEmitter.addProxiedListener(
+      nativeModule.addListener = (...args) => {
+        console.log('DUPA', nativeModule.__expo_module_name__, args);
+        return NativeModules.EXReactNativeEventEmitter.addProxiedListener(
           nativeModule.__expo_module_name__,
           ...args
         );
+      };
       nativeModule.removeListeners = (...args) =>
         NativeModules.EXReactNativeEventEmitter.removeProxiedListeners(
           nativeModule.__expo_module_name__,
@@ -65,9 +67,9 @@ export class EventEmitter {
     // @ts-ignore: the EventEmitter interface has been changed in react-native@0.64.0
     const removedListenerCount = this._eventEmitter.listenerCount
       ? // @ts-ignore: this is available since 0.64
-        this._eventEmitter.listenerCount(eventName)
+      this._eventEmitter.listenerCount(eventName)
       : // @ts-ignore: this is available in older versions
-        this._eventEmitter.listeners(eventName).length;
+      this._eventEmitter.listeners(eventName).length;
     this._eventEmitter.removeAllListeners(eventName);
     this._listenerCount -= removedListenerCount;
     invariant(
@@ -99,7 +101,7 @@ export class EventEmitter {
     delete subscription[nativeEmitterSubscriptionKey];
 
     // Release closed-over references to the emitter
-    subscription.remove = () => {};
+    subscription.remove = () => { };
 
     if (!this._listenerCount && Platform.OS !== 'ios' && this._nativeModule.stopObserving) {
       this._nativeModule.stopObserving();

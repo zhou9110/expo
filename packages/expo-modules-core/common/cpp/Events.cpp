@@ -11,7 +11,8 @@ namespace events {
 
 static const char *addListenerFunctionName = "addListener";
 static const char *removeListenersFunctionName = "removeListeners";
-static const char *emitFunctionName = "__emit__";
+static const char *emitFunctionName = "emit";
+static const char *listenersMapName = "__listeners__";
 
 /**
  Creates an event listener subscription.
@@ -78,6 +79,53 @@ jsi::Function createAddListenerFunction(jsi::Runtime &runtime, SharedListenersMa
   jsi::PropNameID functionName = jsi::PropNameID::forAscii(runtime, addListenerFunctionName);
   return jsi::Function::createFromHostFunction(runtime, functionName, 2, function);
 }
+//jsi::Function createAddListenerFunction(jsi::Runtime &runtime) {
+//  jsi::HostFunctionType function = [=](jsi::Runtime &runtime,
+//                                       const jsi::Value &thisValue,
+//                                       const jsi::Value *args,
+//                                       size_t count) -> jsi::Value {
+//    // TODO: Validate argument types
+//    jsi::String eventName = args[0].asString(runtime);
+//    jsi::Function listener = args[1].asObject(runtime).asFunction(runtime);
+//
+//    jsi::Object thisObject = thisValue.asObject(runtime);
+//    jsi::Value listenersMap = thisObject.getProperty(runtime, listenersMapName);
+//
+//    bool listenersMapIsDefined = listenersMap.isObject();
+//
+//    jsi::Object listenersMapObject = listenersMapIsDefined ? listenersMap.asObject(runtime) : jsi::Object(runtime);
+//    jsi::Value listeners = listenersMapObject.getProperty(runtime, eventName);
+////    bool listeners
+//
+//    bool listenersArrayWasDefined = listenersMapObject.getProperty(runtime, "");
+//    jsi::Array listenersArray = listenersMapObject.getPropertyAsObject(runtime, "");
+//
+//    if (listenersMap.isUndefined()) {
+//      jsi::Array listenersArray = jsi::Array::createWithElements(runtime, listener);
+//
+//      listenersMapObject.setProperty(runtime, eventName, listenersArray);
+//      thisObject.setProperty(runtime, listenersMapName, listenersMapObject);
+//
+//      // Call the startObserving function with the event name
+//      thisObject
+//        .getPropertyAsFunction(runtime, "startObserving")
+//        .callWithThis(runtime, thisObject, {
+//          jsi::Value(runtime, eventName),
+//        });
+//
+//      // TODO: Return a subscription
+//      return jsi::Value::undefined();
+//    }
+//    jsi::Object listenersMapObject = listenersMap.asObject(runtime);
+//
+//
+//
+//
+//    return createListenerSubscription(runtime, listenersMap, eventName, listener);
+//  };
+//  jsi::PropNameID functionName = jsi::PropNameID::forAscii(runtime, addListenerFunctionName);
+//  return jsi::Function::createFromHostFunction(runtime, functionName, 2, function);
+//}
 
 /**
  Creates a JavaScript function that removes all event listeners from the given map.
@@ -122,6 +170,36 @@ jsi::Function createEmitFunction(jsi::Runtime &runtime, SharedListenersMap liste
   jsi::PropNameID functionName = jsi::PropNameID::forAscii(runtime, emitFunctionName);
   return jsi::Function::createFromHostFunction(runtime, functionName, 2, function);
 }
+//jsi::Function createEmitFunction(jsi::Runtime &runtime) {
+//  jsi::HostFunctionType function = [=](jsi::Runtime &runtime,
+//                                       const jsi::Value &thisValue,
+//                                       const jsi::Value *args,
+//                                       size_t count) -> jsi::Value {
+//    // TODO: Validate argument types
+//    std::string eventName = args[0].asString(runtime).utf8(runtime);
+//    jsi::Object thisObject = thisValue.asObject(runtime);
+//    jsi::Value listeners = thisObject.getProperty(runtime, listenersArrayName);
+//
+//    if (listeners.isUndefined()) {
+//      return jsi::Value::undefined();
+//    }
+//    jsi::Array listenersArray = listeners.asObject(runtime).asArray(runtime);
+//
+//    for (size_t i = 0; i < listenersArray.size(runtime); i++) {
+//      jsi::Function listener = listenersArray
+//        .getValueAtIndex(runtime, i)
+//        .asObject(runtime)
+//        .asFunction(runtime);
+//
+//      listener.callWithThis(runtime, thisObject, {
+//        jsi::Value(runtime, args[1]),
+//      });
+//    }
+//    return jsi::Value::undefined();
+//  };
+//  jsi::PropNameID functionName = jsi::PropNameID::forAscii(runtime, emitFunctionName);
+//  return jsi::Function::createFromHostFunction(runtime, functionName, 2, function);
+//}
 
 #pragma mark - Publics
 
@@ -132,7 +210,7 @@ void decorateEventEmitter(jsi::Runtime &runtime, jsi::Object &jsObject) {
   jsObject.setProperty(runtime, removeListenersFunctionName, createRemoveListenersFunction(runtime, listenersMap));
 
   // TODO: Make it a non-enumerable property
-  jsObject.setProperty(runtime, emitFunctionName, createEmitFunction(runtime, listenersMap));
+//  jsObject.setProperty(runtime, emitFunctionName, createEmitFunction(runtime, listenersMap));
 }
 
 bool canEmitEvents(jsi::Runtime &runtime, jsi::Object &jsObject) {
@@ -145,6 +223,12 @@ void emitEvent(jsi::Runtime &runtime, jsi::Object &jsObject, std::string eventNa
     jsi::Value(runtime, payload)
   });
 }
+
+//void createEventEmitterPrototype(jsi::Runtime &runtime) {
+//  jsi::Object prototype = jsi::Object(runtime);
+//
+//  jsi::Function emitFunction = createEmitFunction(runtime);
+//}
 
 } // namespace events
 } // namespace expo

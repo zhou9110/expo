@@ -29,8 +29,6 @@ PODS:
     - ExpoModulesCore
   - EXJSONUtils (0.11.0)
   - EXJSONUtils/Tests (0.11.0)
-  - EXLocation (16.4.0):
-    - ExpoModulesCore
   - EXManifests (0.11.0):
     - ExpoModulesCore
   - EXManifests/Tests (0.11.0):
@@ -830,7 +828,6 @@ DEPENDENCIES:
   - EXInAppPurchases (from `../../../packages/expo-in-app-purchases/ios`)
   - EXJSONUtils (from `../../../packages/expo-json-utils/ios`)
   - EXJSONUtils/Tests (from `../../../packages/expo-json-utils/ios`)
-  - EXLocation (from `../../../packages/expo-location/ios`)
   - EXManifests (from `../../../packages/expo-manifests/ios`)
   - EXManifests/Tests (from `../../../packages/expo-manifests/ios`)
   - EXMediaLibrary (from `../../../packages/expo-media-library/ios`)
@@ -1009,9 +1006,6 @@ EXTERNAL SOURCES:
   EXJSONUtils:
     inhibit_warnings: false
     :path: "../../../packages/expo-json-utils/ios"
-  EXLocation:
-    inhibit_warnings: false
-    :path: "../../../packages/expo-location/ios"
   EXManifests:
     inhibit_warnings: false
     :path: "../../../packages/expo-manifests/ios"
@@ -1304,7 +1298,6 @@ SPEC CHECKSUMS:
   EXImageLoader: 7f0a6f7534461787baf1c6c1140c6c13e89e82bb
   EXInAppPurchases: fa0af818ea94ae5c2df9ff234f5f29e557d88efd
   EXJSONUtils: f201c0e92a2a835909714b9c60f6fd65dd01f785
-  EXLocation: 43aa0af2d612791245df41f86d0995c7380abd53
   EXManifests: 04bba5e6b64da18ac13011c367316f203760dea8
   EXMediaLibrary: 2b8d9f49a6c2523b4e0ae9557db05f1343ef820d
   EXNotifications: c3d43ae880be510cd95d92cc63505383c66dd353

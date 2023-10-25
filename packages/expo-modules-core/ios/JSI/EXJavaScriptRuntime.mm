@@ -152,6 +152,13 @@
   return object ? [[EXJavaScriptObject alloc] initWith:object runtime:self] : nil;
 }
 
+- (nonnull EXJavaScriptObject *)createObjectWithClass:(nonnull EXJavaScriptObject *)jsClass
+{
+  jsi::Value constructorResult = [jsClass get]->asFunction(*_runtime).callAsConstructor(*_runtime, {});
+  std::shared_ptr<jsi::Object> objectPtr = std::make_shared<jsi::Object>(constructorResult.asObject(*_runtime));
+  return [[EXJavaScriptObject alloc] initWith:objectPtr runtime:self];
+}
+
 #pragma mark - Script evaluation
 
 - (nonnull EXJavaScriptValue *)evaluateScript:(nonnull NSString *)scriptSource

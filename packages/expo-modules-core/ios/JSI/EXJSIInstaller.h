@@ -25,4 +25,6 @@
 + (void)decorateEventEmitter:(nonnull EXJavaScriptObject *)object
                    inRuntime:(nonnull EXJavaScriptRuntime *)runtime;
 
++ (nonnull EXJavaScriptObject *)getEventEmitterClass:(nonnull EXJavaScriptRuntime *)runtime;
+
 @end

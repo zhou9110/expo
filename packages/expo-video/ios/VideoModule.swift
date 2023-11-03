@@ -12,7 +12,7 @@ public final class VideoModule: Module {
       }
 
       Prop("nativeControls") { (view, nativeControls: Bool?) in
-        view.playerViewController.showsPlaybackControls = nativeControls ?? true
+        view.showPlaybackControls = nativeControls ?? true
       }
 
       Prop("contentFit") { (view, contentFit: VideoContentFit?) in

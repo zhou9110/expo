@@ -2,9 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
-group = 'host.exp.exponent'
-version = '2.6.0'
-
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 if (expoModulesCorePlugin.exists()) {
   apply from: expoModulesCorePlugin
@@ -40,24 +37,6 @@ buildscript {
   }
 }
 
-// Remove this if and it's contents, when support for SDK49 is dropped
-if (!safeExtGet("expoProvidesDefaultConfig", false)) {
-  afterEvaluate {
-    publishing {
-      publications {
-        release(MavenPublication) {
-          from components.release
-        }
-      }
-      repositories {
-        maven {
-          url = mavenLocal().url
-        }
-      }
-    }
-  }
-}
-
 android {
   // Remove this if and it's contents, when support for SDK49 is dropped
   if (!safeExtGet("expoProvidesDefaultConfig", false)) {
@@ -68,22 +47,22 @@ android {
       targetSdkVersion safeExtGet("targetSdkVersion", 33)
     }
 
+    lintOptions {
+      abortOnError false
+    }
+
     publishing {
       singleVariant("release") {
         withSourcesJar()
       }
-    }
-
-    lintOptions {
-      abortOnError false
     }
   }
 
   def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
   if (agpVersion.tokenize('.')[0].toInteger() < 8) {
     compileOptions {
-      sourceCompatibility JavaVersion.VERSION_1_8
-      targetCompatibility JavaVersion.VERSION_1_8
+      sourceCompatibility JavaVersion.VERSION_11
+      targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {

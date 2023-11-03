@@ -11,6 +11,12 @@ public final class VideoView: ExpoView, AVPlayerViewControllerDelegate {
       playerViewController.player = player
     }
   }
+  
+  var showPlaybackControls = true {
+    didSet {
+      playerViewController.showsPlaybackControls = showPlaybackControls
+    }
+  }
 
   var isFullscreen: Bool = false
 
@@ -62,6 +68,7 @@ public final class VideoView: ExpoView, AVPlayerViewControllerDelegate {
     willBeginFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator
   ) {
     isFullscreen = true
+    playerViewController.showsPlaybackControls = true
   }
 
   public func playerViewController(
@@ -72,12 +79,13 @@ public final class VideoView: ExpoView, AVPlayerViewControllerDelegate {
     // It seems better to continue playing, so we resume the player once the dismissing animation finishes.
     let wasPlaying = player?.timeControlStatus == .playing
 
-    coordinator.animate(alongsideTransition: nil) { context in
+    coordinator.animate(alongsideTransition: nil) { [self] context in
       if !context.isCancelled {
         if wasPlaying {
           self.player?.play()
         }
         self.isFullscreen = false
+        self.playerViewController.showsPlaybackControls = showPlaybackControls
       }
     }
   }

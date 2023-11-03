@@ -1,24 +1,16 @@
 package expo.modules.video
 
 import android.content.Context
-import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import androidx.media3.common.C.VOLUME_FLAG_ALLOW_RINGER_MODES
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.SeekParameters
-import androidx.media3.exoplayer.SimpleExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import expo.modules.kotlin.exception.Exceptions
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import java.util.concurrent.Executors
 
 class VideoModule : Module() {
   private val context: Context
@@ -31,7 +23,6 @@ class VideoModule : Module() {
     View(VideoView::class) {
       Prop("player") { view, player: VideoPlayer? ->
         player?.let {
-          view.player = null
           view.player = it.ref
         }
       }
@@ -46,17 +37,15 @@ class VideoModule : Module() {
       }
 
       AsyncFunction("enterFullscreen") { view: VideoView ->
+        view.enterFullScreen()
       }
 
       AsyncFunction("exitFullscreen") { view: VideoView ->
+        view.exitFullScreen()
       }
 
       OnViewDestroys { view: VideoView ->
         view.releasePlayer()
-      }
-
-      OnViewDidUpdateProps {
-        it.playerView.player?.seekTo(0)
       }
     }
 
@@ -90,7 +79,7 @@ class VideoModule : Module() {
         }
       }.set { player: VideoPlayer, isMuted: Boolean ->
         runOnMain {
-          player.ref.volume = if (isMuted) currentVolume else 0.0f
+          player.ref.volume = if (isMuted) 0.0f else currentVolume
         }
       }
 
@@ -108,7 +97,7 @@ class VideoModule : Module() {
 
       Function("seekBy") { player: VideoPlayer, seconds: Int ->
         runOnMain {
-          player.ref.seekTo(player.ref.contentPosition + (seconds * 1000).toLong())
+          player.ref.seekTo(player.ref.contentPosition + (seconds * 1000L))
         }
       }
 

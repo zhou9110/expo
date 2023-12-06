@@ -91,6 +91,14 @@ export function postTransforms(versionName: string): TransformPipeline {
         with: `$1/$3/${versionName}$5`,
       },
       {
+        paths: ['ReactCommon/react/', 'React'],
+        replace: new RegExp(
+          `(^(#include|#import) <${versionName}React)/${versionName}([^/\\n]+?)/([^/\\n]+?)/([^/\\n]+?)/([^/\\n]+?\\.h>$)`,
+          'gm'
+        ),
+        with: `$1/$3/$4/$5/${versionName}$6`,
+      },
+      {
         // Same as above but for difference nested level.
         paths: ['Libraries/AppDelegate/', 'ReactCommon/react/', 'React/'],
         replace: new RegExp(
@@ -105,6 +113,15 @@ export function postTransforms(versionName: string): TransformPipeline {
         paths: ['FBReactNativeSpec.h', 'FBReactNativeSpec-generated.mm'],
         replace: /(RCTManagedPointer \*\))(JS_)/g,
         with: `$1${versionName}$2`,
+      },
+      // Yoga
+      {
+        paths: ['ReactCommon/yoga/', 'yoga/'],
+        replace: new RegExp(
+          `(^(#include|#import) <${versionName}yoga)/${versionName}([^/\\n]+?)/([^/\\n]+?\\.h>$)`,
+          'gm'
+        ),
+        with: `$1/$3/${versionName}$4`,
       },
 
       // Universal modules

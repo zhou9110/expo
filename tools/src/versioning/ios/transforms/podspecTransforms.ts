@@ -25,6 +25,11 @@ export function podspecTransforms(versionName: string): TransformPipeline {
         replace: /(\.source\s*\=\s*)\S+\n/g,
         with: '$1{ :path => "." }\n',
       },
+      {
+        replace:
+        /(add_dependency\(s,\s+["'])(Yoga|React\-|ReactCommon|RCT|FB|hermes-engine)(?!-Folly)([^"']*["'])/g,
+        with: `$1${versionName}$2$3`,
+      },
 
       // React-Core & ReactCommon
       {
@@ -45,6 +50,16 @@ export function podspecTransforms(versionName: string): TransformPipeline {
         paths: 'ReactCommon.podspec',
         replace: /("USE_HEADERMAP" => "YES",)/g,
         with: '$1 "DEFINES_MODULE" => "YES",',
+      },
+      {
+        paths: 'Yoga.podspec',
+        replace: new RegExp("(ReactCommon/yoga)", "g"),
+        with: `${versionName}$1`,
+      },
+      {
+        paths: 'React-RCTFabric.podspec',
+        replace: /module_name = \"(RCTFabric)\"\nheader_dir = \"(React)\"/,
+        with: `module_name = \"${versionName}$1\"\nheader_dir = \"${versionName}$2\"`,
       },
       {
         // DEFINES_MODULE for swift integration
@@ -86,8 +101,8 @@ export function podspecTransforms(versionName: string): TransformPipeline {
       {
         // Unprefixes inner directory for source_files
         paths: 'Yoga.podspec',
-        replace: /\{(Yoga),(YGEnums),(YGMacros),(YGNode),(YGStyle),(YGValue)\}/g,
-        with: `{${versionName}$1,${versionName}$2,${versionName}$3,${versionName}$4,${versionName}$5,${versionName}$6}`,
+        replace: /\{(Yoga),(YGEnums),(YGMacros),(YGValue)\}/g,
+        with: `{${versionName}$1,${versionName}$2,${versionName}$3,${versionName}$4}`,
       },
 
       // Remove codegen from build phase script

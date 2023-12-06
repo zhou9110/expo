@@ -223,6 +223,9 @@ async function generateVersionedReactNativeAsync(versionName: string): Promise<v
     'ReactCommon/ReactCommon.podspec',
     'ReactCommon/React-Fabric.podspec',
     'ReactCommon/React-rncore.podspec',
+    'ReactCommon/React-FabricImage.podspec',
+    'ReactCommon/React-Mapbuffer.podspec',
+    'ReactCommon/React-nativeconfig.podspec',
     'ReactCommon/hermes/React-hermes.podspec',
     'sdks/hermes-engine/hermes-engine.podspec',
     'package.json',
@@ -364,7 +367,7 @@ async function generateReactNativePodScriptAsync(
       replaceWith: '# $1',
     },
     {
-      find: /\bpod\s+'([^\']+)'/g,
+      find: /\bpod\s+["']([^\'\"]+)["']/g,
       replaceWith: `pod '${versionName}$1'`,
     },
     {
@@ -454,6 +457,11 @@ async function generateReactNativePodScriptAsync(
         paths: 'codegen_utils.rb',
         find: new RegExp(`["'](${reactCodegenDependencies.join('|')})["']:(\\s*\\[\\],?)`, 'g'),
         replaceWith: `"${versionName}$1":$2`,
+      },
+      {
+        paths: 'new_architecture.rb',
+        find: /Private\/Yoga/,
+        replaceWith: `Private/${versionName}Yoga`,
       },
       {
         paths: [
@@ -1008,7 +1016,10 @@ function getCppLibrariesToVersion() {
       customHeaderDir: 'jsireact',
     },
     {
-      libName: 'jsinspector',
+      libName: 'jsinspector-modern',
+    },
+    {
+      libName: 'jserrorhandler',
     },
     {
       libName: 'yoga',

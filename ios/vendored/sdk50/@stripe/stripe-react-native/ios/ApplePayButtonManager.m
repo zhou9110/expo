@@ -1,0 +1,16 @@
+#import <Foundation/Foundation.h>
+#import <ABI50_0_0React/ABI50_0_0RCTBridgeModule.h>
+#import <ABI50_0_0React/ABI50_0_0RCTViewManager.h>
+
+@interface ABI50_0_0RCT_EXTERN_REMAP_MODULE(ApplePayButtonManager, ABI50_0_0ApplePayButtonManager, ABI50_0_0RCTViewManager)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onPressAction, ABI50_0_0RCTDirectEventBlock)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(type, NSNumber)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(buttonStyle, NSNumber)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(borderRadius, NSNumber)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onShippingMethodSelectedAction, ABI50_0_0RCTDirectEventBlock)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onShippingContactSelectedAction, ABI50_0_0RCTDirectEventBlock)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onCouponCodeEnteredAction, ABI50_0_0RCTDirectEventBlock)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onOrderTrackingAction, ABI50_0_0RCTDirectEventBlock)
+
+@end

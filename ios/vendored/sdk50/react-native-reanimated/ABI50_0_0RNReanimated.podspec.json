@@ -1,0 +1,72 @@
+{
+  "name": "ABI50_0_0RNReanimated",
+  "version": "3.6.0",
+  "summary": "More powerful alternative to Animated library for ABI50_0_0React Native.",
+  "description": "ABI50_0_0RNReanimated",
+  "homepage": "https://github.com/software-mansion/react-native-reanimated",
+  "license": "MIT",
+  "authors": {
+    "author": "author@domain.cn"
+  },
+  "platforms": {
+    "ios": "13.4",
+    "tvos": "9.0",
+    "osx": "10.14"
+  },
+  "source": {
+    "git": "https://github.com/software-mansion/react-native-reanimated.git",
+    "tag": "3.6.0"
+  },
+  "source_files": [
+    "apple/**/*.{mm,h,m}",
+    "Common/cpp/**/*.{cpp,h}"
+  ],
+  "preserve_paths": [
+    "Common/cpp/hidden_headers/**"
+  ],
+  "pod_target_xcconfig": {
+    "USE_HEADERMAP": "YES",
+    "DEFINES_MODULE": "YES",
+    "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ABI50_0_0ReactCommon\" \"$(PODS_TARGET_SRCROOT)\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/boost-for-react-native\" \"$(PODS_ROOT)/DoubleConversion\" \"$(PODS_ROOT)/Headers/Private/ABI50_0_0React-Core\" \"$(PODS_ROOT)/Headers/Private/Yoga\"",
+    "FRAMEWORK_SEARCH_PATHS": "\"${PODS_CONFIGURATION_BUILD_DIR}/ABI50_0_0React-hermes\"",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++17",
+    "GCC_PREPROCESSOR_DEFINITIONS[config=Debug]": "$(inherited) HERMES_ENABLE_DEBUGGER=1",
+    "GCC_PREPROCESSOR_DEFINITIONS[config=Release]": "$(inherited) NDEBUG=1"
+  },
+  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -DABI50_0_0REACT_NATIVE_MINOR_VERSION=73 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation",
+  "xcconfig": {
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/boost-for-react-native\" \"$(PODS_ROOT)/glog\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/Headers/Public/ABI50_0_0React-hermes\" \"$(PODS_ROOT)/Headers/Public/ABI50_0_0hermes-engine\" \"${PODS_ROOT}/../../ios/versioned-react-native/ABI50_0_0/ReactNative/ReactCommon\"",
+    "OTHER_CFLAGS": "$(inherited) -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -DABI50_0_0REACT_NATIVE_MINOR_VERSION=73   -DABI50_0_0REANIMATED_VERSION=3.6.0 "
+  },
+  "requires_arc": true,
+  "dependencies": {
+    "ABI50_0_0ReactCommon/turbomodule/core": [],
+    "ABI50_0_0React-Core": [],
+    "RCT-Folly": [],
+    "ABI50_0_0RCTRequired": [],
+    "ABI50_0_0RCTTypeSafety": [],
+    "FBLazyVector": [],
+    "ABI50_0_0React-CoreModules": [],
+    "ABI50_0_0React-Core/DevSupport": [],
+    "ABI50_0_0React-RCTActionSheet": [],
+    "ABI50_0_0React-RCTNetwork": [],
+    "ABI50_0_0React-RCTAnimation": [],
+    "ABI50_0_0React-RCTLinking": [],
+    "ABI50_0_0React-RCTBlob": [],
+    "ABI50_0_0React-RCTSettings": [],
+    "ABI50_0_0React-RCTText": [],
+    "ABI50_0_0React-RCTImage": [],
+    "ABI50_0_0React-Core/RCTWebSocket": [],
+    "ABI50_0_0React-cxxreact": [],
+    "ABI50_0_0React-jsi": [],
+    "ABI50_0_0React-jsiexecutor": [],
+    "ABI50_0_0React-jsinspector": [],
+    "Yoga": [],
+    "DoubleConversion": [],
+    "glog": [],
+    "ABI50_0_0React-hermes": [],
+    "ABI50_0_0hermes-engine": [],
+    "ABI50_0_0React-callinvoker": [],
+    "ABI50_0_0React-RCTAppDelegate": []
+  }
+}

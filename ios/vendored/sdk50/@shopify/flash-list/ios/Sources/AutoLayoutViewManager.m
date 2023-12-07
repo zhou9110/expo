@@ -1,0 +1,14 @@
+#import <Foundation/Foundation.h>
+#import <ABI50_0_0React/ABI50_0_0RCTViewManager.h>
+
+@interface ABI50_0_0RCT_EXTERN_REMAP_MODULE(AutoLayoutViewManager, ABI50_0_0AutoLayoutViewManager, ABI50_0_0RCTViewManager)
+
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(horizontal, BOOL)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(scrollOffset, NSInteger)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(windowSize, NSInteger)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(renderAheadOffset, NSInteger)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(enableInstrumentation, BOOL)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(disableAutoLayout, BOOL)
+ABI50_0_0RCT_EXPORT_VIEW_PROPERTY(onBlankAreaEvent, ABI50_0_0RCTDirectEventBlock)
+
+@end

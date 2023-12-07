@@ -52,11 +52,6 @@ export function podspecTransforms(versionName: string): TransformPipeline {
         with: '$1 "DEFINES_MODULE" => "YES",',
       },
       {
-        paths: 'Yoga.podspec',
-        replace: new RegExp("(ReactCommon/yoga)", "g"),
-        with: `${versionName}$1`,
-      },
-      {
         paths: 'React-RCTFabric.podspec',
         replace: /module_name = \"(RCTFabric)\"\nheader_dir = \"(React)\"/,
         with: `module_name = \"${versionName}$1\"\nheader_dir = \"${versionName}$2\"`,

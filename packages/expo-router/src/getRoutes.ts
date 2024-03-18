@@ -95,8 +95,6 @@ function getDirectoryTree(contextModule: RequireContext, options: Options) {
 
     isValid = true;
 
-    debugger;
-
     const meta = getFileMeta(filePath);
 
     // This is a file that should be ignored. e.g maybe it has an invalid platform?

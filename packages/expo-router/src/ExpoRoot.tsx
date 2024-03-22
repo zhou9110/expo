@@ -7,7 +7,7 @@ import React, { type PropsWithChildren, Fragment, type ComponentType } from 'rea
 import { Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import UpstreamNavigationContainer from './fork/NavigationContainer';
+import { NavigationContainer as UpstreamNavigationContainer } from './fork/NavigationContainer';
 import { useInitializeExpoRouter } from './global-state/router-store';
 import { ServerLocationContext } from './global-state/serverLocationContext';
 import { RequireContext } from './types';

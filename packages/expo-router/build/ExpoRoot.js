@@ -33,7 +33,7 @@ const expo_status_bar_1 = require("expo-status-bar");
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
 const react_native_safe_area_context_1 = require("react-native-safe-area-context");
-const NavigationContainer_1 = __importDefault(require("./fork/NavigationContainer"));
+const NavigationContainer_1 = require("./fork/NavigationContainer");
 const router_store_1 = require("./global-state/router-store");
 const serverLocationContext_1 = require("./global-state/serverLocationContext");
 const Splash_1 = require("./views/Splash");
@@ -85,7 +85,7 @@ function ContextNavigator({ context, location: initialLocation = initialUrl, wra
         }
     }
     const Component = store.rootComponent;
-    return (<NavigationContainer_1.default ref={store.navigationRef} initialState={store.initialState} linking={store.linking} onUnhandledAction={onUnhandledAction} documentTitle={{
+    return (<NavigationContainer_1.NavigationContainer ref={store.navigationRef} initialState={store.initialState} linking={store.linking} onUnhandledAction={onUnhandledAction} documentTitle={{
             enabled: false,
         }}>
       <serverLocationContext_1.ServerLocationContext.Provider value={initialLocation}>
@@ -93,7 +93,7 @@ function ContextNavigator({ context, location: initialLocation = initialUrl, wra
           <Component />
         </WrapperComponent>
       </serverLocationContext_1.ServerLocationContext.Provider>
-    </NavigationContainer_1.default>);
+    </NavigationContainer_1.NavigationContainer>);
 }
 let onUnhandledAction;
 if (process.env.NODE_ENV !== 'production') {

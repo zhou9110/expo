@@ -1,5 +1,5 @@
 import { DeviceEventEmitter } from 'react-native';
-import { EventEmitter } from './EventEmitter';
+import EventEmitter from './EventEmitter';
 import NativeModulesProxy from './NativeModulesProxy';
 import { requireNativeViewManager } from './NativeViewManagerAdapter';
 import Platform from './Platform';

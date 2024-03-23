@@ -1,2 +1,2 @@
-import NativeModulesProxy from '../NativeModulesProxy';
-export default NativeModulesProxy.ExpoModulesCoreErrorManager;
+import { requireOptionalNativeModule } from '../requireNativeModule';
+export default requireOptionalNativeModule('ExpoModulesCoreErrorManager');

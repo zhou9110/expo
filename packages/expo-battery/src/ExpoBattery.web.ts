@@ -2,7 +2,7 @@ import { EventEmitter, Platform } from 'expo-modules-core';
 
 import { BatteryState } from './Battery.types';
 
-const emitter = new EventEmitter({} as any);
+const emitter = new EventEmitter();
 
 declare let navigator: Navigator;
 

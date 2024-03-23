@@ -1,7 +1,5 @@
-// Prevent pulling in all of expo-modules-core on web
-import { EventEmitter } from 'expo-modules-core/build/EventEmitter';
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { Animated, StyleSheet, Text, Platform, View } from 'react-native';
+import { Animated, StyleSheet, Text, Platform, View, NativeEventEmitter } from 'react-native';
 
 import DevLoadingViewNativeModule from './DevLoadingViewNativeModule';
 import { getInitialSafeArea } from './getInitialSafeArea';
@@ -11,9 +9,9 @@ export default function DevLoadingView() {
   const [isDevLoading, setIsDevLoading] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const translateY = useRef(new Animated.Value(0)).current;
-  const emitter = useMemo<EventEmitter>(() => {
+  const emitter = useMemo<NativeEventEmitter>(() => {
     try {
-      return new EventEmitter(DevLoadingViewNativeModule);
+      return new NativeEventEmitter(DevLoadingViewNativeModule);
     } catch (error) {
       throw new Error(
         'Failed to instantiate native emitter in `DevLoadingView` because the native module `DevLoadingView` is undefined: ' +

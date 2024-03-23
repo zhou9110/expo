@@ -1,10 +1,10 @@
-import type { EventEmitter as EventEmitterType } from '../ts-declarations/EventEmitter';
+import type { EventEmitter as EventEmitterType, EventsMap } from '../ts-declarations/EventEmitter';
 import type { NativeModule as NativeModuleType } from '../ts-declarations/NativeModule';
 import type { SharedObject as SharedObjectType } from '../ts-declarations/SharedObject';
 import uuid from '../uuid';
 
-class EventEmitter<TEventsMap extends Record<never, never>> implements EventEmitterType {
-  private listeners?: Map<keyof TEventsMap, Set<Function>>;
+class EventEmitter<TEventsMap extends EventsMap = EventsMap> implements EventEmitterType {
+  private listeners?: Map<keyof TEventsMap, Set<TEventsMap[keyof TEventsMap]>>;
 
   removeListener<EventName extends keyof TEventsMap>(
     eventName: EventName,
@@ -35,9 +35,9 @@ class EventEmitter<TEventsMap extends Record<never, never>> implements EventEmit
   }
 }
 
-class NativeModule<TEventsMap extends Record<never, never>>
+class NativeModule<TEventsMap extends EventsMap = EventsMap>
   extends EventEmitter<TEventsMap>
-  implements NativeModuleType
+  implements NativeModuleType<TEventsMap>
 {
   [key: string]: any;
   ViewPrototype?: object | undefined;

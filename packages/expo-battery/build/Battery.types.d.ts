@@ -1,3 +1,4 @@
+import type { NativeModule } from 'expo-modules-core/build/ts-declarations/NativeModule';
 export type PowerState = {
     /**
      * A number between `0` and `1`, inclusive, or `-1` if the battery level is unknown.
@@ -48,4 +49,12 @@ export type PowerModeEvent = {
      */
     lowPowerMode: boolean;
 };
+type BatteryModuleEvents = {
+    ['Expo.batteryLevelDidChange'](event: BatteryLevelEvent): any;
+    ['Expo.batteryStateDidChange'](event: BatteryStateEvent): any;
+    ['Expo.powerModeDidChange'](event: PowerModeEvent): any;
+};
+export interface BatteryModule extends NativeModule<BatteryModuleEvents> {
+}
+export {};
 //# sourceMappingURL=Battery.types.d.ts.map

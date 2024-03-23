@@ -49,6 +49,7 @@ export function getTestModules() {
 
   // Expo core modules should run everywhere
   modules.push(
+    require('./tests/ModulesCore'),
     require('./tests/Asset'),
     require('./tests/Constants'),
     require('./tests/FileSystem'),

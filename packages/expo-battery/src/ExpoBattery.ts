@@ -1,2 +1,5 @@
 import { requireNativeModule } from 'expo-modules-core';
-export default requireNativeModule('ExpoBattery');
+
+import type { BatteryModule } from './Battery.types';
+
+export default requireNativeModule<BatteryModule>('ExpoBattery');

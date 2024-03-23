@@ -1,3 +1,5 @@
+import type { NativeModule } from 'expo-modules-core/build/ts-declarations/NativeModule';
+
 // @needsAudit
 export type PowerState = {
   /**
@@ -57,3 +59,11 @@ export type PowerModeEvent = {
    */
   lowPowerMode: boolean;
 };
+
+type BatteryModuleEvents = {
+  ['Expo.batteryLevelDidChange'](event: BatteryLevelEvent);
+  ['Expo.batteryStateDidChange'](event: BatteryStateEvent);
+  ['Expo.powerModeDidChange'](event: PowerModeEvent);
+};
+
+export interface BatteryModule extends NativeModule<BatteryModuleEvents> {}

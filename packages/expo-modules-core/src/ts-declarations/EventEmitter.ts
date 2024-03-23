@@ -29,6 +29,13 @@ export declare class EventEmitter<TEventsMap extends EventsMap = Record<never, n
   constructor();
 
   /**
+   * @deprecated As of SDK 51, creating an event emitter for a native module is no longer necessary
+   * as it is now an instance of `EventEmitter` out of the box.
+   * @hidden
+   */
+  constructor(module: EventEmitter);
+
+  /**
    * Adds a listener for the given event name.
    */
   addListener<EventName extends keyof TEventsMap>(

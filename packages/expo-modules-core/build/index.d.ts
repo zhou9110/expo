@@ -1,5 +1,5 @@
 import { DeviceEventEmitter } from 'react-native';
-import { EventEmitter, Subscription } from './EventEmitter';
+import EventEmitter, { EventSubscription } from './EventEmitter';
 import NativeModulesProxy from './NativeModulesProxy';
 import { ProxyNativeModule } from './NativeModulesProxy.types';
 import { requireNativeViewManager } from './NativeViewManagerAdapter';
@@ -11,7 +11,11 @@ import './web/index';
 export type * from './ts-declarations/global';
 export type * from './ts-declarations/SharedObject';
 export { default as uuid } from './uuid';
-export { DeviceEventEmitter, EventEmitter, NativeModulesProxy, ProxyNativeModule, Platform, Subscription, requireNativeViewManager, CodedError, UnavailabilityError, };
+export { DeviceEventEmitter, EventEmitter, NativeModulesProxy, ProxyNativeModule, Platform, EventSubscription, requireNativeViewManager, CodedError, UnavailabilityError, 
+/**
+ * @deprecated
+ */
+EventSubscription as Subscription, };
 export * from './requireNativeModule';
 export * from './TypedArrays.types';
 /**

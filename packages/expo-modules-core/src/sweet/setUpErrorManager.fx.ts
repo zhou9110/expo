@@ -1,19 +1,25 @@
 import NativeErrorManager from './NativeErrorManager';
-import { EventEmitter } from '../EventEmitter';
+import EventEmitter from '../EventEmitter';
 import Platform from '../Platform';
 import { CodedError } from '../errors/CodedError';
 
 if (__DEV__ && Platform.OS === 'android' && NativeErrorManager) {
   const onNewException = 'ExpoModulesCoreErrorManager.onNewException';
   const onNewWarning = 'ExpoModulesCoreErrorManager.onNewWarning';
-  const eventEmitter = new EventEmitter(NativeErrorManager);
 
-  eventEmitter.addListener(onNewException, ({ message }: { message: string }) => {
-    console.error(message);
+  type NativeErrorManager = {
+    [onNewException](exception: { message: string });
+    [onNewWarning](warning: { message: string });
+  };
+
+  const eventEmitter = new EventEmitter<NativeErrorManager>(NativeErrorManager);
+
+  eventEmitter.addListener(onNewException, (exception) => {
+    console.error(exception.message);
   });
 
-  eventEmitter.addListener(onNewWarning, ({ message }: { message: string }) => {
-    console.warn(message);
+  eventEmitter.addListener(onNewWarning, (warning) => {
+    console.warn(warning.message);
   });
 }
 

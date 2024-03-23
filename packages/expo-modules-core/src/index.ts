@@ -1,6 +1,6 @@
 import { DeviceEventEmitter } from 'react-native';
 
-import { EventEmitter, Subscription } from './EventEmitter';
+import EventEmitter, { EventSubscription } from './EventEmitter';
 import NativeModulesProxy from './NativeModulesProxy';
 import { ProxyNativeModule } from './NativeModulesProxy.types';
 import { requireNativeViewManager } from './NativeViewManagerAdapter';
@@ -22,11 +22,16 @@ export {
   NativeModulesProxy,
   ProxyNativeModule,
   Platform,
-  Subscription,
+  EventSubscription,
   requireNativeViewManager,
   // Errors
   CodedError,
   UnavailabilityError,
+
+  /**
+   * @deprecated
+   */
+  EventSubscription as Subscription,
 };
 
 export * from './requireNativeModule';

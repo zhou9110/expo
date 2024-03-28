@@ -297,4 +297,4 @@ try {
 require('expo/build/winter');
 
 // Ensure the environment variables from dotenv files are loaded before the first test runs
-require('./env').load({ silent: true });
+require('./setup-env').load({ silent: true });

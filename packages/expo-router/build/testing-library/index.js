@@ -53,6 +53,14 @@ function renderRouter(context = './app', { initialUrl = '/', ...options } = {}) 
     const result = (0, react_native_1.render)(<ExpoRoot_1.ExpoRoot context={mockContext} location={location}/>, {
         ...options,
     });
+    /**
+     * This is a hack to ensure that React Navigation's state updates are processed before we run assertions.
+     * Some updates are async and we need to wait for them to complete, otherwise will we get a false positive.
+     * (that the app will briefly be in the right state, but then update to an invalid state)
+     */
+    router_store_1.store.subscribeToRootState(() => {
+        (0, react_native_1.act)(() => jest.runOnlyPendingTimers());
+    });
     return Object.assign(result, {
         getPathname() {
             return router_store_1.store.routeInfoSnapshot().pathname;

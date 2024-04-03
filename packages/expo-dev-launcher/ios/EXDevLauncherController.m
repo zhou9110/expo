@@ -331,8 +331,9 @@
 
   RCTAssert([UIApplication.sharedApplication.delegate isKindOfClass:[RCTAppDelegate class]],
                @"The `UIApplication.shared.delegate` is not a `RCTAppDelegate` instance.");
-  RCTAppDelegate *rctAppDelegate = (RCTAppDelegate *)UIApplication.sharedApplication.delegate;
-  UIView *rootView = [rctAppDelegate recreateRootViewWithBundleURL:[self getSourceURL] moduleName:nil initialProps:nil launchOptions:_launchOptions];
+  UIView *rootView = [[_bridgeDelegate rootViewFactory] viewWithModuleName:@"main"
+                                                         initialProperties:@{}
+                                                launchOptions:_launchOptions];
   _launcherBridge = _bridgeDelegate.bridge;
 
   [[NSNotificationCenter defaultCenter] addObserver:self

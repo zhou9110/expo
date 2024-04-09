@@ -20,7 +20,6 @@ function getNavOptions() {
         title: 'sitemap',
         headerShown: false,
         presentation: 'modal',
-        animation: 'default',
         headerLargeTitle: false,
         headerTitleStyle: {
             color: 'white',

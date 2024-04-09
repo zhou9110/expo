@@ -11,7 +11,6 @@ exports.getNavigationConfig = getNavigationConfig;
 function getLinkingConfig(routes, metaOnly = true) {
     return {
         prefixes: [],
-        // @ts-expect-error
         config: getNavigationConfig(routes, metaOnly),
         // A custom getInitialURL is used on native to ensure the app always starts at
         // the root path if it's launched from something other than a deep link.

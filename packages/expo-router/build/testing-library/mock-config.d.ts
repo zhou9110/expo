@@ -4,9 +4,10 @@ export type MockContextConfig = string | string[] | Record<string, FileStub> | {
     overrides: Record<string, FileStub>;
 };
 export declare function getMockConfig(context: MockContextConfig, metaOnly?: boolean): {
-    initialRouteName?: string | undefined;
-    screens: Record<string, import("../getReactNavigationConfig").Screen>;
-};
+    path?: string | undefined;
+    screens: object;
+    initialRouteName?: undefined;
+} | undefined;
 export declare function getMockContext(context: MockContextConfig): ((id: string) => any) & {
     keys: () => string[];
     resolve: (key: string) => string;

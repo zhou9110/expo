@@ -9,9 +9,10 @@ import { getRoutes } from '../getRoutes';
 import { ExpoRouterServerManifestV1 } from '../getServerManifest';
 /** Get the linking manifest from a Node.js process. */
 declare function getManifest(options?: Parameters<typeof getRoutes>[1]): Promise<{
-    initialRouteName?: string | undefined;
-    screens: Record<string, import("../getReactNavigationConfig").Screen>;
-}>;
+    path?: string | undefined;
+    screens: object;
+    initialRouteName?: undefined;
+} | undefined>;
 /**
  * Get the server manifest with all dynamic routes loaded with `generateStaticParams`.
  * Unlike the `expo-router/src/routes-manifest.ts` method, this requires loading the entire app in-memory, which

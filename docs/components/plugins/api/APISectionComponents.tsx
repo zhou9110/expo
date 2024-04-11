@@ -39,11 +39,11 @@ const getComponentTypeParameters = ({
   type,
   signatures,
 }: Partial<GeneratedData>) => {
-  if (extendedTypes?.length) {
-    return extendedTypes[0];
-  } else if (signatures?.length && signatures[0].parameters.length) {
-    return signatures?.[0].parameters[0].type;
-  }
+  // if (extendedTypes?.length) {
+  //   return extendedTypes[0];
+  // } else if (signatures?.length && signatures[0].parameters.length) {
+  //   return signatures?.[0].parameters[0].type;
+  // }
   return type;
 };
 

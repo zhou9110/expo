@@ -3,6 +3,9 @@
 import SDWebImage
 import ExpoModulesCore
 
+let upsizingLength = 20.0
+let resizingThreshold = upsizingLength / 2
+
 /**
  An exception to throw when it its not possible to generate a blurhash for a given URL.
  */
@@ -97,6 +100,19 @@ func shouldDownscale(image: UIImage, toSize size: CGSize, scale: Double) -> Bool
   }
   let imageSize = image.size * image.scale
   return imageSize.width > (size.width * scale) && imageSize.height > (size.height * scale)
+}
+
+func upsized(_ size: CGSize, maxSize: CGSize) -> CGSize {
+  let aspectRatio = size.width / size.height
+  let upsize = CGSize(
+    width: (size.width + upsizingLength * max(1.0, aspectRatio)).rounded(),
+    height: (size.height + upsizingLength / min(1.0, aspectRatio)).rounded()
+  )
+  log.debug("upsized \(size) to \(upsize)")
+  if upsize.width > maxSize.width || upsize.height > maxSize.height {
+    return maxSize
+  }
+  return upsize
 }
 
 /**

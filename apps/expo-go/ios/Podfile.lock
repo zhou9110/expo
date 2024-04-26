@@ -92,6 +92,13 @@ PODS:
     - SDWebImageAVIFCoder (~> 0.11.0)
     - SDWebImageSVGCoder (~> 1.7.0)
     - SDWebImageWebPCoder (~> 0.14.6)
+  - ExpoImage/Tests (1.12.4):
+    - ExpoModulesCore
+    - ExpoModulesTestCore
+    - SDWebImage (~> 5.19.1)
+    - SDWebImageAVIFCoder (~> 0.11.0)
+    - SDWebImageSVGCoder (~> 1.7.0)
+    - SDWebImageWebPCoder (~> 0.14.6)
   - ExpoImageManipulator (12.0.2):
     - EXImageLoader
     - ExpoModulesCore
@@ -1875,6 +1882,7 @@ DEPENDENCIES:
   - ExpoHaptics (from `../../../packages/expo-haptics/ios`)
   - ExpoHead (from `../../../packages/expo-router/ios`)
   - ExpoImage (from `../../../packages/expo-image/ios`)
+  - ExpoImage/Tests (from `../../../packages/expo-image/ios`)
   - ExpoImageManipulator (from `../../../packages/expo-image-manipulator/ios`)
   - ExpoImagePicker (from `../../../packages/expo-image-picker/ios`)
   - ExpoKeepAwake (from `../../../packages/expo-keep-awake/ios`)
@@ -2355,7 +2363,7 @@ SPEC CHECKSUMS:
   ExpoGL: a2d717e4b7279a075d7dff04d8d2471cb404ad2c
   ExpoHaptics: 5a3a88971af384255baf2504f38b41189cec6984
   ExpoHead: 47d909542232a3825dec584af336c251b31b1000
-  ExpoImage: 80a5b14f9e0d845f2c2877cee1c2b1038ba276a6
+  ExpoImage: f956f027abc4c96e59af7dd971251aa132817076
   ExpoImageManipulator: 6a77db525b1a5f39c91fc071bee7b6dbac2f5227
   ExpoImagePicker: 31b4a619a9910d12efc762f7c151129828bca4fe
   ExpoKeepAwake: f3a7b0ff4b4911957264dad8cb584ef688326a22
@@ -2399,7 +2407,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
-  hermes-engine: 118ab4d39602f2b05fd37ba7356343d2b5344b9c
+  hermes-engine: 233d40fff282f1f6cdfcd557c2903a67ee6c0869
   JKBigInteger: 5c72131974815e969c0782c41e3452f1bbe5619f
   libavif: 84bbb62fb232c3018d6f1bab79beea87e35de7b7
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009

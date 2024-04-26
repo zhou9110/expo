@@ -8,6 +8,8 @@ import VisionKit
 
 typealias SDWebImageContext = [SDWebImageContextOption: Any]
 
+internal let scalingPadding: Double = 34.0
+
 // swiftlint:disable:next type_body_length
 public final class ImageView: ExpoView {
   static let contextSourceKey = SDWebImageContextOption(rawValue: "source")
@@ -71,9 +73,27 @@ public final class ImageView: ExpoView {
     didSet {
       // Reload the image when the bounds size has changed and is not empty.
       if oldValue.size != bounds.size && bounds.size != .zero {
-        reload()
+        if isViewEmpty || shouldTriggerResizing(frameSize: bounds.size) {
+          reload()
+        } else {
+          log.info("resizing skipped")
+        }
       }
     }
+  }
+
+  func shouldTriggerResizing(frameSize: CGSize) -> Bool {
+    guard let imageSize = sdImageView.image?.size else {
+      return true
+    }
+    let range = (-scalingPadding / 2.0...scalingPadding / 2.0)
+    let widthDiff = frameSize.width - imageSize.width
+    let heightDiff = frameSize.height - imageSize.height
+
+    log.debug("shouldTriggerResizing image size: \(imageSize)")
+    log.debug("shouldTrigger")
+    log.debug("shouldTriggerResizing: \(widthDiff) | \(heightDiff)")
+    return !range.contains(widthDiff) && !range.contains(heightDiff)
   }
 
   public required init(appContext: AppContext? = nil) {
@@ -239,12 +259,12 @@ public final class ImageView: ExpoView {
       ])
 
       let scale = window?.screen.scale ?? UIScreen.main.scale
-      let idealSize = idealSize(
+      let idealSize = withPadding(size: idealSize(
         contentPixelSize: image.size * image.scale,
         containerSize: frame.size,
         scale: scale,
         contentFit: contentFit
-      ).rounded(.up)
+      )).rounded(.up)
 
       Task {
         let image = await processImage(image, idealSize: idealSize, scale: scale)
@@ -416,6 +436,7 @@ public final class ImageView: ExpoView {
       sdImageView.tintColor = nil
       sdImageView.image = image
     }
+    log.info("set image with size \(image?.size) on frame \(frame.size)")
 
 #if !os(tvOS)
     if enableLiveTextInteraction {

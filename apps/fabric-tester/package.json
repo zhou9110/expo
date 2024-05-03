@@ -1,6 +1,7 @@
 {
   "name": "fabric-tester",
   "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
@@ -9,6 +10,15 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/datetimepicker": "8.0.0",
+    "@react-native-community/netinfo": "11.3.1",
+    "@react-native-community/slider": "4.5.2",
+    "@react-native-masked-view/masked-view": "0.3.1",
+    "@react-native-picker/picker": "2.7.5",
+    "@react-native-segmented-control/segmented-control": "2.5.2",
+    "@shopify/flash-list": "1.6.4",
+    "bare-expo": "*",
     "expo": "~51.0.0-beta.0",
     "expo-apple-authentication": "~6.4.0",
     "expo-av": "~14.0.0",
@@ -20,10 +30,20 @@
     "expo-splash-screen": "~0.27.0",
     "expo-status-bar": "~1.12.0",
     "expo-updates": "~0.25.0",
+    "native-component-list": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.1",
-    "react-native-web": "~0.19.6"
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-pager-view": "6.3.0",
+    "react-native-reanimated": "~3.10.0",
+    "react-native-safe-area-context": "4.10.1",
+    "react-native-screens": "~3.31.1",
+    "react-native-svg": "15.2.0-rc.0",
+    "react-native-view-shot": "3.8.0",
+    "react-native-web": "~0.19.6",
+    "react-native-webview": "13.8.6",
+    "test-suite": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
@@ -31,7 +51,18 @@
   "private": true,
   "expo": {
     "autolinking": {
-      "exclude": []
+      "exclude": [
+        "expo-ads-facebook",
+        "expo-ads-admob",
+        "expo-module-template",
+        "expo-module-template-local",
+        "expo-face-detector"
+      ],
+      "ios": {
+        "flags": {
+          "inhibit_warnings": false
+        }
+      }
     }
   }
 }

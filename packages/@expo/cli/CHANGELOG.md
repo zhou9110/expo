@@ -10,6 +10,8 @@
 
 ### 💡 Others
 
+- Unify Android device prompts with iOS prompts for `npx expo run:android -d`. ([#28622](https://github.com/expo/expo/pull/28622) by [@byCedric](https://github.com/byCedric))
+
 ## 0.18.8 — 2024-05-02
 
 _This version does not introduce any user-facing changes._

@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { GestureResponderEvent } from 'react-native';
+import { LinkToOptions } from '../global-state/routing';
 export default function useLinkToPathProps(props: {
     href: string;
     event?: string;
+    options?: LinkToOptions;
 }): {
     href: string;
     role: "link";

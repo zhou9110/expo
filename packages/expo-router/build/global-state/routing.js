@@ -36,20 +36,20 @@ function assertIsReady(store) {
         throw new Error('Attempted to navigate before mounting the Root Layout component. Ensure the Root Layout component is rendering a Slot, or other navigator on the first render.');
     }
 }
-function navigate(url) {
-    return this.linkTo((0, href_1.resolveHref)(url), 'NAVIGATE');
+function navigate(url, options) {
+    return this.linkTo((0, href_1.resolveHref)(url), 'NAVIGATE', options);
 }
 exports.navigate = navigate;
-function push(url) {
-    return this.linkTo((0, href_1.resolveHref)(url), 'PUSH');
+function push(url, options) {
+    return this.linkTo((0, href_1.resolveHref)(url), 'PUSH', options);
 }
 exports.push = push;
 function dismiss(count) {
     this.navigationRef?.dispatch(native_1.StackActions.pop(count));
 }
 exports.dismiss = dismiss;
-function replace(url) {
-    return this.linkTo((0, href_1.resolveHref)(url), 'REPLACE');
+function replace(url, options) {
+    return this.linkTo((0, href_1.resolveHref)(url), 'REPLACE', options);
 }
 exports.replace = replace;
 function dismissAll() {
@@ -92,7 +92,7 @@ function setParams(params = {}) {
     return (this.navigationRef?.current?.setParams)(params);
 }
 exports.setParams = setParams;
-function linkTo(href, event) {
+function linkTo(href, event, { initialScreen } = {}) {
     if ((0, url_1.shouldLinkExternally)(href)) {
         Linking.openURL(href);
         return;
@@ -143,10 +143,10 @@ function linkTo(href, event) {
         console.error('Could not generate a valid navigation state for the given path: ' + href);
         return;
     }
-    return navigationRef.dispatch(getNavigateAction(state, rootState, event));
+    return navigationRef.dispatch(getNavigateAction(state, rootState, event, initialScreen));
 }
 exports.linkTo = linkTo;
-function getNavigateAction(actionState, navigationState, type = 'NAVIGATE') {
+function getNavigateAction(actionState, navigationState, type = 'NAVIGATE', initialScreen = true) {
     /**
      * We need to find the deepest navigator where the action and current state diverge, If they do not diverge, the
      * lowest navigator is the target.
@@ -193,6 +193,11 @@ function getNavigateAction(actionState, navigationState, type = 'NAVIGATE') {
         payload.screen = actionStateRoute.name;
         // Merge the params, ensuring that we create a new object
         payload.params = { ...params };
+        if (!initialScreen) {
+            // Normally, the new screen will replace the initial screen, but we want to keep the initial screen
+            // then we need to set the initial flag to false
+            payload.initial = false;
+        }
         // Params don't include the screen, thats a separate attribute
         delete payload.params['screen'];
         // Continue down the payload tree

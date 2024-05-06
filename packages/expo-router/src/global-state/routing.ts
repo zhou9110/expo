@@ -18,20 +18,20 @@ function assertIsReady(store: RouterStore) {
   }
 }
 
-export function navigate(this: RouterStore, url: ExpoRouter.Href) {
-  return this.linkTo(resolveHref(url), 'NAVIGATE');
+export function navigate(this: RouterStore, url: ExpoRouter.Href, options?: LinkToOptions) {
+  return this.linkTo(resolveHref(url), 'NAVIGATE', options);
 }
 
-export function push(this: RouterStore, url: ExpoRouter.Href) {
-  return this.linkTo(resolveHref(url), 'PUSH');
+export function push(this: RouterStore, url: ExpoRouter.Href, options?: LinkToOptions) {
+  return this.linkTo(resolveHref(url), 'PUSH', options);
 }
 
 export function dismiss(this: RouterStore, count?: number) {
   this.navigationRef?.dispatch(StackActions.pop(count));
 }
 
-export function replace(this: RouterStore, url: ExpoRouter.Href) {
-  return this.linkTo(resolveHref(url), 'REPLACE');
+export function replace(this: RouterStore, url: ExpoRouter.Href, options?: LinkToOptions) {
+  return this.linkTo(resolveHref(url), 'REPLACE', options);
 }
 
 export function dismissAll(this: RouterStore) {
@@ -76,7 +76,16 @@ export function setParams(this: RouterStore, params: Record<string, string | num
   return (this.navigationRef?.current?.setParams as any)(params);
 }
 
-export function linkTo(this: RouterStore, href: string, event?: string) {
+export interface LinkToOptions {
+  initialScreen?: boolean;
+}
+
+export function linkTo(
+  this: RouterStore,
+  href: string,
+  event?: string,
+  { initialScreen }: LinkToOptions = {}
+) {
   if (shouldLinkExternally(href)) {
     Linking.openURL(href);
     return;
@@ -139,13 +148,14 @@ export function linkTo(this: RouterStore, href: string, event?: string) {
     return;
   }
 
-  return navigationRef.dispatch(getNavigateAction(state, rootState, event));
+  return navigationRef.dispatch(getNavigateAction(state, rootState, event, initialScreen));
 }
 
 function getNavigateAction(
   actionState: ResultState,
   navigationState: NavigationState,
-  type = 'NAVIGATE'
+  type = 'NAVIGATE',
+  initialScreen = true
 ) {
   /**
    * We need to find the deepest navigator where the action and current state diverge, If they do not diverge, the
@@ -203,6 +213,12 @@ function getNavigateAction(
     payload.screen = actionStateRoute.name;
     // Merge the params, ensuring that we create a new object
     payload.params = { ...params };
+
+    if (!initialScreen) {
+      // Normally, the new screen will replace the initial screen, but we want to keep the initial screen
+      // then we need to set the initial flag to false
+      payload.initial = false;
+    }
     // Params don't include the screen, thats a separate attribute
     delete payload.params['screen'];
 
@@ -241,7 +257,6 @@ function getNavigateAction(
   if (type === 'REPLACE' && navigationState.type === 'tab') {
     type = 'JUMP_TO';
   }
-
   return {
     type,
     target: navigationState.key,

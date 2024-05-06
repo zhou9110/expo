@@ -6,6 +6,8 @@
 
 ### 🎉 New features
 
+- Add option to navigate to a route as a non-initial screen
+
 ### 🐛 Bug fixes
 
 ### 💡 Others

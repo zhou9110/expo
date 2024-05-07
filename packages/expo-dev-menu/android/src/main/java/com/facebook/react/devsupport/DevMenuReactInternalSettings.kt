@@ -3,8 +3,6 @@
 package com.facebook.react.devsupport
 
 import android.content.Context
-import com.facebook.react.modules.debug.interfaces.DeveloperSettings
-import com.facebook.react.packagerconnection.PackagerConnectionSettings
 import expo.modules.devmenu.react.DevMenuPackagerConnectionSettings
 
 /**
@@ -14,62 +12,22 @@ import expo.modules.devmenu.react.DevMenuPackagerConnectionSettings
 internal class DevMenuReactInternalSettings(
   serverIp: String,
   application: Context
-) : DevInternalSettings(application, {}) {
-  private val packagerConnectionSettings = DevMenuPackagerConnectionSettings(serverIp, application)
+) : DevInternalSettingsBase(application, null) {
+  override val packagerConnectionSettings = DevMenuPackagerConnectionSettings(serverIp, application)
 
-  override fun isElementInspectorEnabled() = false
+  override var isElementInspectorEnabled = false
 
-  override fun isJSMinifyEnabled() = false
+  override var isJSMinifyEnabled = false
 
-  override fun setRemoteJSDebugEnabled(remoteJSDebugEnabled: Boolean) = Unit
+  override var isJSDevModeEnabled = true
 
-  override fun isJSDevModeEnabled() = true
+  override var isStartSamplingProfilerOnInit = false
 
-  override fun isStartSamplingProfilerOnInit() = false
+  override var isAnimationFpsDebugEnabled = false
 
-  override fun setElementInspectorEnabled(enabled: Boolean) = Unit
+  override var isRemoteJSDebugEnabled = false
 
-  override fun isAnimationFpsDebugEnabled() = false
+  override var isHotModuleReplacementEnabled = true
 
-  override fun setJSDevModeEnabled(value: Boolean) = Unit
-
-  override fun setFpsDebugEnabled(enabled: Boolean) = Unit
-
-  override fun isRemoteJSDebugEnabled() = false
-
-  override fun isHotModuleReplacementEnabled() = true
-
-  override fun setHotModuleReplacementEnabled(enabled: Boolean) = Unit
-
-  override fun isFpsDebugEnabled() = false
-
-  override fun getPackagerConnectionSettings() = packagerConnectionSettings
-}
-
-/**
- * A wrapper of [DevInternalSettings] allows us to access the package-private [DevInternalSettings] properties
- */
-internal class DevMenuInternalSettingsWrapper(private val devSettings: DevInternalSettings) {
-  constructor(developerSettings: DeveloperSettings) : this(developerSettings as DevInternalSettings)
-
-  val isFpsDebugEnabled = devSettings.isFpsDebugEnabled
-  var isHotModuleReplacementEnabled: Boolean
-    get() = devSettings.isHotModuleReplacementEnabled
-    set(value) {
-      devSettings.isHotModuleReplacementEnabled = value
-    }
-
-  var isRemoteJSDebugEnabled: Boolean
-    get() = devSettings.isRemoteJSDebugEnabled
-    set(value) {
-      devSettings.isRemoteJSDebugEnabled = value
-    }
-
-  var isJSDevModeEnabled: Boolean
-    get() = devSettings.isJSDevModeEnabled
-    set(value) {
-      devSettings.isJSDevModeEnabled = value
-    }
-
-  val packagerConnectionSettings: PackagerConnectionSettings = devSettings.packagerConnectionSettings
+  override var isFpsDebugEnabled = false
 }

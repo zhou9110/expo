@@ -170,7 +170,7 @@ class AppContext(
             this,
             jsRuntimePointer,
             jniDeallocator,
-            reactContext.runtimeExecutor!!
+            reactContext.catalystInstance.runtimeExecutor
           )
         } else {
           jsiInterop.installJSI(

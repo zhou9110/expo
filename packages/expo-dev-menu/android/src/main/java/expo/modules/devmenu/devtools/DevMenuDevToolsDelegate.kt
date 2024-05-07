@@ -6,7 +6,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import com.facebook.react.bridge.UiThreadUtil
-import com.facebook.react.devsupport.DevMenuInternalSettingsWrapper
+import com.facebook.react.devsupport.DevMenuReactInternalSettings
 import expo.interfaces.devmenu.DevMenuManagerInterface
 import expo.interfaces.devmenu.ReactHostWrapper
 import expo.modules.devmenu.DEV_MENU_TAG
@@ -31,11 +31,8 @@ class DevMenuDevToolsDelegate(
   val devSettings
     get() = reactDevManager?.devSettings
 
-  internal val devInternalSettings: DevMenuInternalSettingsWrapper?
-    get() {
-      val devSettings = this.devSettings ?: return null
-      return if (devSettings.javaClass.canonicalName == "com.facebook.react.devsupport.DevLauncherInternalSettings") DevMenuInternalSettingsWrapper(devSettings) else null
-    }
+  internal val devInternalSettings: DevMenuReactInternalSettings?
+    get() = this.devSettings as? DevMenuReactInternalSettings
 
   val reactContext
     get() = _reactContext.get()
@@ -53,13 +50,7 @@ class DevMenuDevToolsDelegate(
   }
 
   fun toggleRemoteDebugging() = runWithDevSupportEnabled {
-    val reactDevManager = reactDevManager ?: return
-    val devSettings = devSettings ?: return
-    manager.closeMenu()
-    UiThreadUtil.runOnUiThread {
-      devSettings.isRemoteJSDebugEnabled = !devSettings.isRemoteJSDebugEnabled
-      reactDevManager.handleReloadJS()
-    }
+    throw IllegalStateException("Unsupported action")
   }
 
   fun togglePerformanceMonitor(context: Context) {

@@ -64,7 +64,8 @@ public class NonFinalBridgelessDevSupportManager extends DevSupportManagerBase {
                 2 /* minNumShakes */,
                 null /* customPackagerCommandHandlers */,
                 null /* surfaceDelegateFactory */,
-                null /* devLoadingViewManager */);
+                null /* devLoadingViewManager */,
+                null /* pausedInDebuggerOverlayManager */);
         mReactHost = host;
     }
 

@@ -15,6 +15,7 @@ import expo.modules.devlauncher.launcher.DevLauncherControllerInterface
 import expo.modules.devlauncher.launcher.errors.DevLauncherAppError
 import expo.modules.devlauncher.launcher.errors.DevLauncherErrorActivity
 
+@Suppress("CONFLICTING_INHERITED_JVM_DECLARATIONS")
 class DevLauncherBridgeDevSupportManager(
   applicationContext: Context,
   reactInstanceDevHelper: ReactInstanceDevHelper?,
@@ -34,6 +35,7 @@ class DevLauncherBridgeDevSupportManager(
   minNumShakes,
   customPackagerCommandHandlers,
   null,
+  null,
   null
 ),
   DevLauncherKoinComponent {
@@ -43,7 +45,7 @@ class DevLauncherBridgeDevSupportManager(
     injectDevServerHelper(applicationContext, this, controller)
   }
 
-  override fun showNewJavaError(message: String?, e: Throwable) {
+  override fun showNewJavaError(message: String?, e: Throwable?) {
     Log.e("DevLauncher", "$message", e)
     if (!DevLauncherController.wasInitialized()) {
       Log.e(

@@ -12,6 +12,7 @@ import expo.modules.devlauncher.launcher.DevLauncherControllerInterface
 import expo.modules.devlauncher.launcher.errors.DevLauncherAppError
 import expo.modules.devlauncher.launcher.errors.DevLauncherErrorActivity
 
+@Suppress("CONFLICTING_INHERITED_JVM_DECLARATIONS")
 class DevLauncherBridgelessDevSupportManager(
   host: ReactHostImpl,
   context: Context,
@@ -23,7 +24,7 @@ class DevLauncherBridgelessDevSupportManager(
     injectDevServerHelper(context, this, controller)
   }
 
-  override fun showNewJavaError(message: String?, e: Throwable) {
+  override fun showNewJavaError(message: String?, e: Throwable?) {
     Log.e("DevLauncher", "$message", e)
     if (!DevLauncherController.wasInitialized()) {
       Log.e("DevLauncher", "DevLauncher wasn't initialized. Couldn't intercept native error handling.")

@@ -10,7 +10,7 @@ export declare function canGoBack(this: RouterStore): boolean;
 export declare function canDismiss(this: RouterStore): boolean;
 export declare function setParams(this: RouterStore, params?: Record<string, string | number>): any;
 export interface LinkToOptions {
-    initialScreen?: boolean;
+    unstable_ignoreAnchor?: boolean;
 }
-export declare function linkTo(this: RouterStore, href: string, event?: string, { initialScreen }?: LinkToOptions): void;
+export declare function linkTo(this: RouterStore, href: string, event?: string, { unstable_ignoreAnchor: ignoreAnchor }?: LinkToOptions): void;
 //# sourceMappingURL=routing.d.ts.map

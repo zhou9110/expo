@@ -59,7 +59,7 @@ exports.Redirect = Redirect;
  * @param props.push Should push the current route, always adding to the history.
  * @param props.asChild Forward props to child component. Useful for custom buttons.
  * @param props.children Child elements to render the content.
- * @param props.initialRoute Preserve the initial route in the stack.
+ * @param props.unstable_ignoreAnchor  Ignore the anchor if navigating to a new navigator .
  * @param props.className On web, this sets the HTML `class` directly. On native, this can be used with CSS interop tools like Nativewind.
  */
 exports.Link = React.forwardRef(ExpoRouterLink);
@@ -106,7 +106,7 @@ const useHrefAttrs = react_native_1.Platform.select({
 });
 function ExpoRouterLink({ href, replace, push, 
 // TODO: This does not prevent default on the anchor tag.
-asChild, rel, target, download, initial: isStackInitialScreen, ...rest }, ref) {
+asChild, rel, target, download, unstable_ignoreAnchor: ignoreAnchor, ...rest }, ref) {
     // Mutate the style prop to add the className on web.
     const style = useInteropClassName(rest);
     // If not passing asChild, we need to forward the props to the anchor tag using React Native Web's `hrefAttrs`.
@@ -125,7 +125,7 @@ asChild, rel, target, download, initial: isStackInitialScreen, ...rest }, ref) {
     const props = (0, useLinkToPathProps_1.default)({
         href: resolvedHref,
         event,
-        options: { initialScreen: isStackInitialScreen },
+        options: { unstable_ignoreAnchor: ignoreAnchor },
     });
     const onPress = (e) => {
         if ('onPress' in rest) {

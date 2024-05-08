@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { GestureResponderEvent, Platform } from 'react-native';
 
+import { LinkToOptions } from '../../types/expo-router';
 import { appendBaseUrl } from '../fork/getPathFromState';
 import { useExpoRouter } from '../global-state/router-store';
 import { stripGroupSegmentsFromPath } from '../matchers';
-import { LinkToOptions } from '../../types/expo-router';
 
 function eventShouldPreventDefault(
   e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent

@@ -269,7 +269,7 @@ export namespace ExpoRouter {
     /** On web, this sets the HTML `class` directly. On native, this can be used with CSS interop tools like Nativewind. */
     className?: string;
 
-    /** Preserve the initial route when navigating into a nested stack */
+    /** Preserve the initial route when navigating into a nested stack. */
     initial?: boolean;
 
     onPress?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent) => void;

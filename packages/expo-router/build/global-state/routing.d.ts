@@ -1,5 +1,5 @@
 import { type RouterStore } from './router-store';
-import { ExpoRouter } from '../../types/expo-router';
+import { ExpoRouter, LinkToOptions } from '../../types/expo-router';
 export declare function navigate(this: RouterStore, url: ExpoRouter.Href, options?: LinkToOptions): any;
 export declare function push(this: RouterStore, url: ExpoRouter.Href, options?: LinkToOptions): any;
 export declare function dismiss(this: RouterStore, count?: number): void;
@@ -9,8 +9,5 @@ export declare function goBack(this: RouterStore): void;
 export declare function canGoBack(this: RouterStore): boolean;
 export declare function canDismiss(this: RouterStore): boolean;
 export declare function setParams(this: RouterStore, params?: Record<string, string | number>): any;
-export interface LinkToOptions {
-    unstable_ignoreAnchor?: boolean;
-}
 export declare function linkTo(this: RouterStore, href: string, event?: string, { unstable_ignoreAnchor: ignoreAnchor }?: LinkToOptions): void;
 //# sourceMappingURL=routing.d.ts.map

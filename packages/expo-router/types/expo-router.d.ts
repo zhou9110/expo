@@ -1,7 +1,10 @@
 /* eslint-disable */
 import type { ReactNode } from 'react';
 import type { TextProps, GestureResponderEvent } from 'react-native';
-import { LinkToOptions } from '../src/global-state/routing';
+
+export interface LinkToOptions {
+  unstable_ignoreAnchor?: boolean;
+}
 
 export namespace ExpoRouter {
   type StaticRoutes = string;

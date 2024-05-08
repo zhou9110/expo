@@ -3,7 +3,7 @@ import * as Linking from 'expo-linking';
 import { nanoid } from 'nanoid/non-secure';
 
 import { type RouterStore } from './router-store';
-import { ExpoRouter } from '../../types/expo-router';
+import { ExpoRouter, LinkToOptions } from '../../types/expo-router';
 import { ResultState } from '../fork/getStateFromPath';
 import { resolveHref } from '../link/href';
 import { resolve } from '../link/path';
@@ -74,10 +74,6 @@ export function canDismiss(this: RouterStore): boolean {
 export function setParams(this: RouterStore, params: Record<string, string | number> = {}) {
   assertIsReady(this);
   return (this.navigationRef?.current?.setParams as any)(params);
-}
-
-export interface LinkToOptions {
-  unstable_ignoreAnchor?: boolean;
 }
 
 export function linkTo(

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GestureResponderEvent } from 'react-native';
-import { LinkToOptions } from '../global-state/routing';
+import { LinkToOptions } from '../../types/expo-router';
 export default function useLinkToPathProps(props: {
     href: string;
     event?: string;

@@ -11,6 +11,7 @@
 ### 🐛 Bug fixes
 
 - [Android] Fix wrong content fit "fill" and "cover". ([#29364](https://github.com/expo/expo/pull/29364) by [@RRaideRR](https://github.com/RRaideRR))
+- [iOS] Fix crashes when creating new players. ([#29428](https://github.com/expo/expo/pull/29428) by [@behenate](https://github.com/behenate))
 
 ### 💡 Others
 

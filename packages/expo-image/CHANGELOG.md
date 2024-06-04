@@ -8,6 +8,8 @@
 
 ### 🐛 Bug fixes
 
+- Fix props not being passed to parent container.
+
 ### 💡 Others
 
 ## 1.12.9 — 2024-05-09

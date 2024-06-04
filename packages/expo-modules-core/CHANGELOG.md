@@ -12,6 +12,7 @@
 ### 🐛 Bug fixes
 
 - [Android] Fix error: no viable constructor or deduction guide for deduction of template arguments of 'weak_ptr' ([#29075](https://github.com/expo/expo/pull/29075) by [@rafi16jan](https://github.com/rafi16jan))
+- [iOS] Fix random conversion errors when converting JavaScript floating point numbers to `Swift.Float`. ([#29053](https://github.com/expo/expo/pull/29053) by [@behenate](https://github.com/behenate))
 
 ### 💡 Others
 

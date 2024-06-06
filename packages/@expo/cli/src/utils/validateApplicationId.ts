@@ -141,7 +141,7 @@ export async function getBundleIdWarningInternalAsync(bundleId: string): Promise
   try {
     debug(`Checking iOS bundle ID '${bundleId}' at: ${url}`);
     const response = await fetchAsync(url);
-    const json = await response.json();
+    const json: any = await response.json();
     if (json.resultCount > 0) {
       const firstApp = json.results[0];
       return formatInUseWarning(firstApp.trackName, firstApp.sellerName, bundleId);

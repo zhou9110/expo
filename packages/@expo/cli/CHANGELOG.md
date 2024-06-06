@@ -7,7 +7,7 @@
 ### 🎉 New features
 
 - Deep link to simulators without prompting for permissions first. ([#29468](https://github.com/expo/expo/pull/29468) by [@EvanBacon](https://github.com/EvanBacon))
-- Remove `node-fetch` in favor of `undici` for improved Node 22+ support.
+- Remove `node-fetch` in favor of `undici` for improved Node 22+ support. ([#29511](https://github.com/expo/expo/pull/29511) by [@byCedric](https://github.com/byCedric))
 
 ### 🐛 Bug fixes
 

@@ -141,6 +141,7 @@
     "@types/klaw-sync": "^6.0.0",
     "@types/lodash.debounce": "^4.0.9",
     "@types/npm-package-arg": "^6.1.0",
+    "@types/node": "^18.19.34",
     "@types/picomatch": "^2.3.3",
     "@types/progress": "^2.0.5",
     "@types/prompts": "^2.0.6",
